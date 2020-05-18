@@ -19,7 +19,7 @@
       <td>{{patient.lastname}}</td>
       <td>{{patient.date_of_birth}}</td>
       <td>
-        <button type="button" routerLink="/edit/{{patient.id}}" class="btn btn-info">Edit</button>
+        <button type="button" routerLink="/patients/edit/{{patient.id}}" class="btn btn-info">Edit</button>
         <button type="button"  (click)="delete(patient)"  class="btn btn-danger">Delete</button>
       </td>
     </tr>

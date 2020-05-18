@@ -25,22 +25,24 @@ export class FormPatientComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.id = +this.route.snapshot.paramMap.get('id');
+    this.getHero();
     this.getDoctors();
     this.getRoles();
-    this.id = +this.route.snapshot.paramMap.get('id');
+
 
     this.formPacient = this.fb.group({
-      SSCode: [12, [Validators.required, Validators.maxLength(11)]],
-      login: ['dfadsfad', [Validators.required, Validators.minLength(8)]],
-      password: ['ggdsdfdsa', [Validators.required, Validators.minLength(8)]],
-      name: ['adsfasdf', [Validators.required, Validators.maxLength(20)]],
-      lastname: ['dsfdsadsf', [Validators.required, Validators.maxLength(35)]],
-      date_of_birth: [ 'null', [Validators.required]],
-      allergies: ['dsfasdgsffhfg', [Validators.maxLength(400)]],
-      cancer: ['hjgddghf', [Validators.maxLength(25)]],
-      diseases: ['gghfgffg', [Validators.maxLength(50)]],
+      SSCode: [, [Validators.required, Validators.maxLength(11)]],
+      login: ['', [Validators.required, Validators.minLength(8)]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      name: ['', [Validators.required, Validators.maxLength(20)]],
+      lastname: ['', [Validators.required, Validators.maxLength(35)]],
+      date_of_birth: ['', [Validators.required]],
+      allergies: ['', [Validators.maxLength(400)]],
+      cancer: ['', [Validators.maxLength(25)]],
+      diseases: ['', [Validators.maxLength(50)]],
       role: ['', [Validators.required]],
-      doctor: ['', [Validators.required]]
+      doctor: ['', [Validators.required]],
     });
   }
 
@@ -55,7 +57,6 @@ export class FormPatientComponent implements OnInit {
 
     this.patient = this.formPacient.value;
 
-
     this.add(this.patient);
 
     // alert("Correo Enviado \nEliminamos el formulario");
@@ -64,6 +65,29 @@ export class FormPatientComponent implements OnInit {
   add(patient: Patient): void {
     this.patientsService.createPatient(patient);
   }
+  getHero(): void {
+
+    this.patientsService.getPatient(this.id)
+      .subscribe((data) => {
+          this.patient = data;
+          this.formPacient.patchValue({
+        SSCode: this.patient.SSCode,
+        login: this.patient.login,
+        password: this.patient.password,
+        name: this.patient.name,
+        lastname: this.patient.lastname,
+        date_of_birth:this.patient.date_of_birth,
+        allergies:this.patient.allergies,
+        cancer:this.patient.cancer,
+        diseases:this.patient.diseases,
+        role:this.patient.role,
+        doctor:this.patient.doctor
+      });
+      });
+    }
+
+
+
   getRoles(): void {
     this.patientsService.getRoles().subscribe(
       (data) => (this.roles = data),
@@ -75,5 +99,5 @@ export class FormPatientComponent implements OnInit {
       (data) => (this.doctors = data),
       (err) => console.log(err)
     );
-  }
+  };
 }

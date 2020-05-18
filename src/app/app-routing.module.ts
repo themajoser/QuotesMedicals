@@ -5,8 +5,7 @@ import { FormPatientComponent } from './Components/patients/formpatient.componen
 import { PatientsComponent } from './Components/patients/patients.component';
 import { LoginComponent  } from './Components/login/login.component';
 const routes: Routes = [
-  { path: 'patients', component: PatientsComponent, canActivate: [AuthGuard], data: {
-roleCode: 'doctor'}
+  { path: 'patients', component: PatientsComponent, canActivate: [AuthGuard], data: {roleCode: 'doctor'}
   },
   { path: 'patients/create', component: FormPatientComponent, canActivate: [AuthGuard], data: {roleCode: 'doctor'} },
   { path: 'patients/edit/:id', component: FormPatientComponent },
