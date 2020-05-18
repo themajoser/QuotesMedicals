@@ -1,5 +1,5 @@
 import { Role } from './../Interfaces/role';
-import { Patient } from './../Interfaces/patient';
+import { Doctor } from './../Interfaces/Doctor';
 import { Injectable } from '@angular/core';
 import {formatDate} from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -12,7 +12,7 @@ import { catchError } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
 })
-export class PatientsService {
+export class DoctorsService {
 
 
   constructor(private http: HttpClient, private router: Router) {}
@@ -35,14 +35,14 @@ export class PatientsService {
 }
 
   /** GET heroes from the server */
-  getAllPatients(): Observable<Patient[]> {
-    const path = `${this.api}/patients`;
+  getAllDoctors(): Observable<Doctor[]> {
+    const path = `${this.api}/doctors`;
     return this.http.get(path).pipe(
       map(response => {
-        const patients = response as Patient[];
-        return patients.map(patient => {
-          patient.date_of_birth = formatDate(patient.date_of_birth, 'dd-MM-yyyy', 'en-US' );
-          return patient;
+        const Doctors = response as Doctor[];
+        return Doctors.map(Doctor => {
+          Doctor.date_of_birth = formatDate(Doctor.date_of_birth, 'dd-MM-yyyy', 'en-US' );
+          return Doctor;
         });
       }),
       catchError(e => {
@@ -52,29 +52,29 @@ export class PatientsService {
 
     );
   }
-  getPatient(id: number): Observable<Patient>  {
-    const path = `${this.api}/patients/${id}`;
-    return this.http.get<Patient>(path);
+  getDoctor(id: number): Observable<Doctor>  {
+    const path = `${this.api}/doctors/${id}`;
+    return this.http.get<Doctor>(path);
   }
   getRoles(): Observable<Role[]> {
     const path = `${this.api}/roles/`;
     return this.http.get<Role[]>(path);
   }
-  createPatient(patient: Patient) {
-    const path = `${this.api}/patients/create`;
+  createDoctor(Doctor: Doctor) {
+    const path = `${this.api}/Doctors/create`;
 
-    return this.http.post(path, patient, this.httpOptions)  .subscribe((data) => console.log(data),
+    return this.http.post(path, Doctor, this.httpOptions)  .subscribe((data) => console.log(data),
     err => console.log(err));
   }
-  updatePatient(patient: Patient, id: number) {
+  updateDoctor(Doctor: Doctor, id: number) {
     console.log( id);
-    const path = `${this.api}/patients/${id}`;
-    return this.http.put<Patient>(path, patient);
+    const path = `${this.api}/doctors/${id}`;
+    return this.http.put<Doctor>(path, Doctor);
   }
-  deletePatient(patient: Patient| number) {
-    const id = typeof patient === 'number' ? patient : patient.id;
+  deleteDoctor(Doctor: Doctor| number) {
+    const id = typeof Doctor === 'number' ? Doctor : Doctor.id;
     console.log(id);
-    const path = `${this.api}/patients/${id}`;
+    const path = `${this.api}/Doctors/${id}`;
     return this.http.delete(path);
   }
 }

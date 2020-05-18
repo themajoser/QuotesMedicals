@@ -1,17 +1,13 @@
-export interface Patient {
-  SSCode:number;
+export interface Doctor {
   id:number;
   login:string;
   password:string;
   name:string;
   lastname:string;
   date_of_birth:string;
-  allergies:string;
-  cancer:string;
-  diseases:string;
+  speciality:string;
   deleted:number;
   created_at:string;
   deleted_at:string;
-  doctor:any;
   role: any;
 }
