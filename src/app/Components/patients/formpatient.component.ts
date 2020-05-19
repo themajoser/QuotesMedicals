@@ -30,7 +30,6 @@ export class FormPatientComponent implements OnInit {
     this.getDoctors();
     this.getRoles();
 
-
     this.formPacient = this.fb.group({
       SSCode: [, [Validators.required, Validators.maxLength(11)]],
       login: ['', [Validators.required, Validators.minLength(8)]],
@@ -65,28 +64,28 @@ export class FormPatientComponent implements OnInit {
   add(patient: Patient): void {
     this.patientsService.createPatient(patient);
   }
+  
   getHero(): void {
-
-    this.patientsService.getPatient(this.id)
-      .subscribe((data) => {
-          this.patient = data;
-          this.formPacient.patchValue({
+    if (!this.id) {
+      return;
+    }
+    this.patientsService.getPatient(this.id).subscribe((data) => {
+      this.patient = data;
+      this.formPacient.patchValue({
         SSCode: this.patient.SSCode,
         login: this.patient.login,
         password: this.patient.password,
         name: this.patient.name,
         lastname: this.patient.lastname,
-        date_of_birth:this.patient.date_of_birth,
-        allergies:this.patient.allergies,
-        cancer:this.patient.cancer,
-        diseases:this.patient.diseases,
-        role:this.patient.role,
-        doctor:this.patient.doctor
+        date_of_birth: this.patient.date_of_birth,
+        allergies: this.patient.allergies,
+        cancer: this.patient.cancer,
+        diseases: this.patient.diseases,
+        role: this.patient.role,
+        doctor: this.patient.doctor,
       });
-      });
-    }
-
-
+    });
+  }
 
   getRoles(): void {
     this.patientsService.getRoles().subscribe(
@@ -99,5 +98,15 @@ export class FormPatientComponent implements OnInit {
       (data) => (this.doctors = data),
       (err) => console.log(err)
     );
-  };
+  }
+  compare(object1: any, object2: any): boolean {
+    return object1 == null ||
+      object2 == null ||
+      // tslint:disable-next-line: triple-equals
+      object1 == undefined ||
+      // tslint:disable-next-line: triple-equals
+      object2 == undefined
+      ? false
+      : object1.id === object2.id;
+  }
 }

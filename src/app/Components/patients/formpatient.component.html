@@ -101,7 +101,7 @@
 
     <div class="form-group">
       <label>Rol</label>
-      <select class="form-control" formControlName="role">
+      <select [compareWith]="compare" class="form-control" formControlName="role">
         <option *ngFor="let role of roles" [ngValue]="role">{{
           role.name
         }}</option>
@@ -117,7 +117,7 @@
 
     <div class="form-group">
       <label>Doctor</label>
-      <select class="form-control" formControlName="doctor">
+      <select [compareWith]="compare" class="form-control" formControlName="doctor">
         <option *ngFor="let doctor of doctors" [ngValue]="doctor">{{
           doctor.login
         }}</option>
