@@ -1,5 +1,5 @@
 import { Role } from './../Interfaces/role';
-import { Patient } from './../Interfaces/patient';
+import { Appointment } from './../Interfaces/appointment';
 import { Injectable } from '@angular/core';
 import {formatDate} from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -12,7 +12,7 @@ import { catchError } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
 })
-export class PatientsService {
+export class AppointmentsService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -35,35 +35,40 @@ export class PatientsService {
 }
 
   /** GET heroes from the server */
-  getAllPatients(): Observable<Patient[]> {
-    const path = `${this.api}/patients`;
-    return this.http.get<Patient[]>(path);
+  getAppointmentsByDoctor(id: number): Observable<Appointment[]>  {
+    const path = `${this.api}/appointments/doctor/${id}`;
+    
+    return this.http.get<Appointment[]>(path ) ;
+  }
+  getAllAppointments(): Observable<Appointment[]> {
+    const path = `${this.api}/appointments`;
+    return this.http.get<Appointment[]>(path);
 
   }
-  getPatient(id: number): Observable<Patient>  {
-    const path = `${this.api}/patients/${id}`;
-    return this.http.get<Patient>(path ) ;
+  getAppointment(id: number): Observable<Appointment>  {
+    const path = `${this.api}/appointments/${id}`;
+    return this.http.get<Appointment>(path ) ;
   }
   getRoles(): Observable<Role[]> {
     const path = `${this.api}/roles/`;
     return this.http.get<Role[]>(path);
   }
-  createPatient(patient: Patient) {
-    const path = `${this.api}/patients/create`;
+  createAppointment(appointment: Appointment) {
+    const path = `${this.api}/appointments/create`;
 
-    return this.http.post(path, patient, this.httpOptions)  .subscribe((data) => console.log(data),
+    return this.http.post(path, appointment, this.httpOptions)  .subscribe((data) => console.log(data),
     err => console.log(err));
   }
-  updatePatient(patient: Patient, id: number) {
+  updateAppointment(appointment: Appointment, id: number) {
 
-    const path = `${this.api}/patients/${id}`;
-    return this.http.put(path, patient, this.httpOptions) .subscribe((data) => console.log(data),
+    const path = `${this.api}/appointments/${id}`;
+    return this.http.put(path, appointment, this.httpOptions) .subscribe((data) => console.log(data),
     err => console.log(err));
   }
-  deletePatient(patient: Patient| number) {
-    const id = typeof patient === 'number' ? patient : patient.id;
+  deleteAppointment(appointment: Appointment| number) {
+    const id = typeof appointment === 'number' ? appointment : appointment.id;
     console.log(id);
-    const path = `${this.api}/patients/${id}`;
+    const path = `${this.api}/appointments/${id}`;
     return this.http.delete(path);
   }
 }

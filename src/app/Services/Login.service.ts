@@ -24,7 +24,7 @@ export class LoginService {
 
   public login(usuario: string, password: string): Observable<JwtModel> {
     let url=this.authURL +  usuario + '/' + password;
-   
+    console.log(url);
     return this.httpClient.get<JwtModel>(url , this.cabecera);
   }
 }

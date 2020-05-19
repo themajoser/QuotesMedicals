@@ -1,0 +1,31 @@
+<div class="card-head">
+  <h1>Citas </h1>
+</div>
+<div class="card-body">
+  <div class="float-right mb-3">
+  <button type="button" routerLink="/appointments/create"   class="btn btn-info">Crear nueva cita</button>
+</div>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Assement</th>
+      <th scope="col">Status</th>
+      <th scope="col">Date</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody  *ngFor="let appointment of appointments">
+    <tr>
+      <th scope="row">{{appointment.id}}</th>
+      <td>{{appointment.assement}}</td>
+      <td>{{appointment.status}}</td>
+      <td>{{appointment.date}}</td>
+      <td>
+        <button type="button" routerLink="/appointments/edit/{{appointment.id}}" class="btn btn-info">Edit</button>
+        <button type="button"  (click)="delete(appointment)"  class="btn btn-danger">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>

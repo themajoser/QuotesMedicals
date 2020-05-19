@@ -1,0 +1,104 @@
+<div class="card-head">
+  <h1>Crear Paciente</h1>
+</div>
+<div class="card-body">
+
+  <form [formGroup]="formAppointment" (ngSubmit)="onSubmit()">
+
+
+    <div class="form-group">
+      <label>Valoración</label>
+      <input class="form-control" type="text" formControlName="assement" />
+      <div
+        class="alert alert-danger"
+        *ngIf="formulario.assement.errors && formulario.assement.touched"
+      >
+        <div>La valoración:</div>
+        <div *ngIf="formulario.assement.errors.required">No puede estar vacio</div>
+        <div *ngIf="formulario.assement.errors.minlength">
+          Deber contener más de 8 carácteres
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="form-group">
+      <label>Estado</label>
+      <input class="form-control" type="text" formControlName="status" />
+      <div
+        class="alert alert-danger"
+        *ngIf="formulario.status.errors && formulario.status.touched"
+      >
+        <div>El Estado:</div>
+        <div *ngIf="formulario.status.errors.required">No puede estar vacio</div>
+        <div *ngIf="formulario.status.errors.maxlength">
+          Deber contener más de 20 carácteres
+        </div>
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <label>Fecha</label>
+      <input class="form-control" type="datetime-local" formControlName="date" />
+      <div
+        class="alert alert-danger"
+        *ngIf="
+          formulario.date.errors && formulario.date.touched
+        "
+      >
+        <div>La Fecha:</div>
+        <div *ngIf="formulario.date.errors.required">
+          No puede estar vacia
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Paciente</label>
+      <select [compareWith]="compare" class="form-control" formControlName="patient">
+        <option [ngValue]="undefined" >Selecciona un rol</option>
+        <option *ngFor="let patient of patients" [ngValue]="patient">{{
+          patient.name
+        }}</option>
+      </select>
+      <div
+        class="alert alert-danger"
+        *ngIf="formulario.patient.errors && formulario.patient.touched"
+      >
+        <div>El Paciente:</div>
+        <div *ngIf="formulario.patient.errors.required">No puede estar vacio</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Doctor</label>
+      <select [compareWith]="compare" class="form-control" formControlName="doctor">
+        <option [ngValue]="undefined" >Selecciona un doctor</option>
+        <option *ngFor="let doctor of doctors" [ngValue]="doctor">{{
+          doctor.name
+        }}</option>
+      </select>
+      <div
+        class="alert alert-danger"
+        *ngIf="formulario.doctor.errors && formulario.doctor.touched"
+      >
+        <div>El doctor:</div>
+        <div *ngIf="formulario.doctor.errors.required">
+          No puede estar vacio
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+    <div>
+      <button class="btn btn-primary">Enviar</button>
+      <button class="btn btn-danger" type="reset">Cancelar</button>
+    </div>
+  </form>
+</div>

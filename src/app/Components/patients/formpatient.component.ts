@@ -1,9 +1,9 @@
+import { Patient } from './../../Interfaces/patient';
 import { Doctor } from './../../Interfaces/doctor';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PatientsService } from '../../Services/patients.service';
-import { Patient } from '../../Interfaces/patient';
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DoctorsService } from 'src/app/Services/doctors.service';
 
 @Component({
@@ -21,12 +21,13 @@ export class FormPatientComponent implements OnInit {
     private patientsService: PatientsService,
     private doctorsService: DoctorsService,
     private route: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) {}
 
   ngOnInit() {
     this.id = +this.route.snapshot.paramMap.get('id');
-    this.getHero();
+
     this.getDoctors();
     this.getRoles();
 
@@ -43,6 +44,7 @@ export class FormPatientComponent implements OnInit {
       role: ['', [Validators.required]],
       doctor: ['', [Validators.required]],
     });
+    this.getHero();
   }
 
   get formulario() {
@@ -50,21 +52,34 @@ export class FormPatientComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.formPacient.invalid) {
-      return;
-    }
+
+
+
 
     this.patient = this.formPacient.value;
 
+    if (this.id ){
+    this.update( this.patient);
+    this.router.navigate(['/patients']);
+   }else{
+    if (this.formPacient.invalid) {
+      return;
+    }
     this.add(this.patient);
+    this.router.navigate(['/patients']);
+   }
 
-    // alert("Correo Enviado \nEliminamos el formulario");
   }
 
   add(patient: Patient): void {
     this.patientsService.createPatient(patient);
   }
-  
+
+  update(patient: Patient): void {
+
+    this.patientsService.updatePatient(patient, this.id);
+  }
+
   getHero(): void {
     if (!this.id) {
       return;

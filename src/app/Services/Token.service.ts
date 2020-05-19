@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 const TOKEN_KEY = 'AuthToken';
 const USERNAME_KEY = 'AuthUserName';
 const ROLE_KEY = 'AuthRole';
-
+const ID_KEY = 'AuthId';
 @Injectable({
   providedIn: 'root'
 })
@@ -19,7 +19,15 @@ export class TokenService {
   }
 
   public getToken(): string {
-    return sessionStorage.getItem(TOKEN_KEY);
+    return sessionStorage.getItem("AuthId");
+  }
+  public setId(id: string): void {
+    window.sessionStorage.removeItem(ID_KEY);
+    window.sessionStorage.setItem("AuthId", id);
+  }
+
+  public getId(): string {
+    return sessionStorage.getItem(ID_KEY);
   }
 
   public setUserName(userName: string): void {
@@ -39,7 +47,7 @@ export class TokenService {
   public getRole(): string{
     return sessionStorage.getItem(ROLE_KEY);
   }
-  
+
   public isAuthorized(code: string):boolean{
     return this.getRole() === code;
   }

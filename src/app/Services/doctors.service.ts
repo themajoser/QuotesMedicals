@@ -37,20 +37,7 @@ export class DoctorsService {
   /** GET heroes from the server */
   getAllDoctors(): Observable<Doctor[]> {
     const path = `${this.api}/doctors`;
-    return this.http.get(path).pipe(
-      map(response => {
-        const Doctors = response as Doctor[];
-        return Doctors.map(Doctor => {
-          Doctor.date_of_birth = formatDate(Doctor.date_of_birth, 'dd-MM-yyyy', 'en-US' );
-          return Doctor;
-        });
-      }),
-      catchError(e => {
-        this.isNotAutorizate(e);
-        return throwError(e);
-      })
-
-    );
+    return this.http.get<Doctor[]>(path);
   }
   getDoctor(id: number): Observable<Doctor>  {
     const path = `${this.api}/doctors/${id}`;

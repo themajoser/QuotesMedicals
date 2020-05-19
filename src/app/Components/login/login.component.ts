@@ -36,10 +36,12 @@ export class LoginComponent implements OnInit {
   onLogin(): void {
 
     this.Login.login(this.checkoutForm.get('login').value , this.checkoutForm.get('password').value) .subscribe((data) => {
-        this.tokenService.setUserName(data.login);
-
-        this.tokenService.setRole(data.role);
-        this.router.navigateByUrl(this.returnUrl);
+      
+      this.tokenService.setUserName(data.login);
+      console.log(data.id.toString);
+      this.tokenService.setId(String(data.id));
+      this.tokenService.setRole(data.role);
+      this.router.navigateByUrl(this.returnUrl);
 
 
     },

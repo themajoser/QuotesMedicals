@@ -2,6 +2,7 @@
   <h1>Crear Paciente</h1>
 </div>
 <div class="card-body">
+
   <form [formGroup]="formPacient" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label>Código de la seguridad social</label>
@@ -102,6 +103,7 @@
     <div class="form-group">
       <label>Rol</label>
       <select [compareWith]="compare" class="form-control" formControlName="role">
+        <option [ngValue]="undefined" >Selecciona un rol</option>
         <option *ngFor="let role of roles" [ngValue]="role">{{
           role.name
         }}</option>
@@ -118,8 +120,9 @@
     <div class="form-group">
       <label>Doctor</label>
       <select [compareWith]="compare" class="form-control" formControlName="doctor">
+        <option [ngValue]="undefined" >Selecciona un doctor</option>
         <option *ngFor="let doctor of doctors" [ngValue]="doctor">{{
-          doctor.login
+          doctor.name
         }}</option>
       </select>
       <div
