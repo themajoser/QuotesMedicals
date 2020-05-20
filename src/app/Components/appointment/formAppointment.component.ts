@@ -11,7 +11,6 @@ import { Patient } from 'src/app/Interfaces/patient';
 import { FormsModule } from '@angular/forms';
 
 
-
 @Component({
   selector: 'app-formappointment',
   templateUrl: './formAppointment.component.html',

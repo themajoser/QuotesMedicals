@@ -11,6 +11,9 @@ import {ReactiveFormsModule } from '@angular/forms';
 import { FormPatientComponent } from './Components/patients/formpatient.component';
 import { FormsModule } from '@angular/forms';
 import { FormAppointmentComponent } from './Components/appointment/formAppointment.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatSortModule} from '@angular/material/sort';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 
@@ -32,7 +35,9 @@ import { FormAppointmentComponent } from './Components/appointment/formAppointme
       HttpClientModule,
       ReactiveFormsModule,
       BrowserModule,
-      FormsModule
+      FormsModule,
+      BrowserAnimationsModule,
+      MatSortModule
 
 
    ],

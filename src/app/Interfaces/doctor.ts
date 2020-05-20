@@ -12,3 +12,4 @@ export interface Doctor {
   deleted_at:string;
   role: Role;
 }
+

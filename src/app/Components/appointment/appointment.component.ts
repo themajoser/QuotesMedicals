@@ -4,19 +4,24 @@ import { HeaderComponent } from './../header/header.component';
 import { Appointment } from './../../Interfaces/Appointment';
 import { Component, OnInit } from '@angular/core';
 import { TokenService } from './../../Services/Token.service';
+import {Sort} from '@angular/material/sort';
 
 @Component({
   selector: 'app-appointments',
   templateUrl: './appointment.component.html',
 })
 export class AppointmentsComponent implements OnInit {
-  appointments: Appointment[];
+    appointments: Appointment[];
+  sortedData: Appointment[];
+  constructor(private appointmentsService: AppointmentsService, private Login: LoginService,  public tokenService: TokenService ) {
 
-  constructor(private appointmentsService: AppointmentsService, private Login: LoginService,  public tokenService: TokenService ) { }
+   }
+
+
 
   ngOnInit() {
     this.getAppointmentsByDoctor();
-    
+
   }
   getAppointments(): void {
     this.appointmentsService.getAllAppointments()
@@ -25,7 +30,9 @@ export class AppointmentsComponent implements OnInit {
   getAppointmentsByDoctor(): void {
       const id = this.tokenService.getId();
       this.appointmentsService.getAppointmentsByDoctor( +id )
-          .subscribe(Appointments => [this.appointments = Appointments]);
+          .subscribe(Appointments => {this.appointments = Appointments;
+            this.sortedData = this.appointments.slice();
+          });
   }
 
 
@@ -34,6 +41,24 @@ export class AppointmentsComponent implements OnInit {
     this.appointments = this.appointments.filter(h => h !== patient);
     this.appointmentsService.deleteAppointment(patient).subscribe();
   }
+  sortData(sort: Sort) {
+    const data = this.appointments.slice();
+    if (!sort.active || sort.direction === '') {
+      this.sortedData = data;
+      return;
+    }
+
+    this.sortedData = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'id': return compare(a.id, b.id, isAsc);
+        case 'assement': return compare(a.assement, b.assement, isAsc);
+        case 'status': return compare(a.status, b.status, isAsc);
+        case 'date': return compare(a.date.toString(), b.date.toString(), isAsc);
+        default: return 0;
+      }
+    });
+  }
 
 
 
@@ -47,4 +72,7 @@ export class AppointmentsComponent implements OnInit {
 
 
 
+}
+function compare(a: number | string, b: number | string, isAsc: boolean) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }

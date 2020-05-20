@@ -1,3 +1,4 @@
+import { TokenService } from './../../Services/Token.service';
 import { Patient } from './../../Interfaces/patient';
 import { Doctor } from './../../Interfaces/doctor';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -22,12 +23,13 @@ export class FormPatientComponent implements OnInit {
     private doctorsService: DoctorsService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private token: TokenService
   ) {}
 
   ngOnInit() {
     this.id = +this.route.snapshot.paramMap.get('id');
-
+    this.getDoctor();
     this.getDoctors();
     this.getRoles();
 
@@ -53,25 +55,24 @@ export class FormPatientComponent implements OnInit {
 
   onSubmit() {
 
-
-
-
     this.patient = this.formPacient.value;
 
     if (this.id ){
     this.update( this.patient);
-    this.router.navigate(['/patients']);
-   }else{
-    if (this.formPacient.invalid) {
-      return;
-    }
+   }
+    if (!this.id ){
+
     this.add(this.patient);
+   }
     this.router.navigate(['/patients']);
    }
 
-  }
+
 
   add(patient: Patient): void {
+    if (this.formPacient.invalid) {
+      return;
+    }
     this.patientsService.createPatient(patient);
   }
 
@@ -104,7 +105,7 @@ export class FormPatientComponent implements OnInit {
 
   getRoles(): void {
     this.patientsService.getRoles().subscribe(
-      (data) => (this.roles = data),
+      (data) =>{ this.roles = data;},
       (err) => console.log(err)
     );
   }
@@ -113,6 +114,11 @@ export class FormPatientComponent implements OnInit {
       (data) => (this.doctors = data),
       (err) => console.log(err)
     );
+  }
+  getDoctor(): void {
+    this.doctorsService.getDoctor(+this.token.getId()).subscribe((data) => {
+      this.formPacient.controls.doctor.setValue(data);
+    });
   }
   compare(object1: any, object2: any): boolean {
     return object1 == null ||
