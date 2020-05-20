@@ -16,15 +16,16 @@ export class AppointmentsComponent implements OnInit {
 
   ngOnInit() {
     this.getAppointmentsByDoctor();
+    
   }
   getAppointments(): void {
     this.appointmentsService.getAllAppointments()
-        .subscribe(Appointments => [this.appointments = Appointments, console.log(this.appointments)]);
+        .subscribe(Appointments => [this.appointments = Appointments]);
   }
   getAppointmentsByDoctor(): void {
       const id = this.tokenService.getId();
       this.appointmentsService.getAppointmentsByDoctor( +id )
-          .subscribe(Appointments => [this.appointments = Appointments, console.log(this.appointments)]);
+          .subscribe(Appointments => [this.appointments = Appointments]);
   }
 
 

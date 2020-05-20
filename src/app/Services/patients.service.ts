@@ -40,6 +40,11 @@ export class PatientsService {
     return this.http.get<Patient[]>(path);
 
   }
+  getAllPatientsByDoctor(id: number): Observable<Patient[]> {
+    const path = `${this.api}/patients/getPatientByDoctor/${id}`;
+    return this.http.get<Patient[]>(path);
+
+  }
   getPatient(id: number): Observable<Patient>  {
     const path = `${this.api}/patients/${id}`;
     return this.http.get<Patient>(path ) ;
@@ -62,7 +67,6 @@ export class PatientsService {
   }
   deletePatient(patient: Patient| number) {
     const id = typeof patient === 'number' ? patient : patient.id;
-    console.log(id);
     const path = `${this.api}/patients/${id}`;
     return this.http.delete(path);
   }

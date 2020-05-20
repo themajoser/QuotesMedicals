@@ -37,7 +37,7 @@ export class AppointmentsService {
   /** GET heroes from the server */
   getAppointmentsByDoctor(id: number): Observable<Appointment[]>  {
     const path = `${this.api}/appointments/doctor/${id}`;
-    
+
     return this.http.get<Appointment[]>(path ) ;
   }
   getAllAppointments(): Observable<Appointment[]> {
@@ -67,7 +67,6 @@ export class AppointmentsService {
   }
   deleteAppointment(appointment: Appointment| number) {
     const id = typeof appointment === 'number' ? appointment : appointment.id;
-    console.log(id);
     const path = `${this.api}/appointments/${id}`;
     return this.http.delete(path);
   }

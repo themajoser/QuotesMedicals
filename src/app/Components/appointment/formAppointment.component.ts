@@ -1,13 +1,16 @@
+import { TokenService } from './../../Services/Token.service';
 import { PatientsService } from './../../Services/patients.service';
-import { AppointmentsComponent } from './../../Components/appointment/appointment.component';
-import {  Appointment } from '../../Interfaces/appointment';
+import { Appointment } from '../../Interfaces/appointment';
 import { Doctor } from '../../Interfaces/doctor';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DoctorsService } from 'src/app/Services/doctors.service';
 import { AppointmentsService } from 'src/app/Services/appointment.service';
 import { Patient } from 'src/app/Interfaces/patient';
+import { FormsModule } from '@angular/forms';
+
+
 
 @Component({
   selector: 'app-formappointment',
@@ -27,7 +30,8 @@ export class FormAppointmentComponent implements OnInit {
     private doctorsService: DoctorsService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private token: TokenService
   ) {}
 
   ngOnInit() {
@@ -39,9 +43,9 @@ export class FormAppointmentComponent implements OnInit {
     this.formAppointment = this.fb.group({
       assement: ['', [Validators.required, Validators.maxLength(255)]],
       status: ['', [Validators.required, Validators.maxLength(15)]],
-      date: [, [Validators.required]],
+      date: ['', [Validators.required]],
       patient: [, [Validators.required]],
-      doctor: [, [Validators.required]],
+      doctor: [this.getDoctor(), [Validators.required]],
     });
     this.getAppointment();
   }
@@ -51,33 +55,27 @@ export class FormAppointmentComponent implements OnInit {
   }
 
   onSubmit() {
-
-
-
-
     this.appointment = this.formAppointment.value;
 
-    if (this.id ){
-
-    this.update( this.appointment);
-    // this.router.navigate(['/appointments']);
-   }else{
-    if (this.formAppointment.invalid) {
-      return;
+    if (this.id) {
+      this.update(this.appointment);
     }
-    console.log(this.appointment);
-    this.add(this.appointment);
-    // this.router.navigate(['/appointments']);
-   }
 
+    if (!this.id) {
+      this.add(this.appointment);
+    }
+
+    this.router.navigate(['/appointments']);
   }
 
   add(appointment: Appointment): void {
+    if (this.formAppointment.invalid) {
+      return;
+    }
     this.appointmentService.createAppointment(appointment);
   }
 
   update(appointment: Appointment): void {
-
     this.appointmentService.updateAppointment(appointment, this.id);
   }
 
@@ -92,13 +90,13 @@ export class FormAppointmentComponent implements OnInit {
         status: this.appointment.status,
         date: this.appointment.date,
         doctor: this.appointment.doctor,
-        patient: this.appointment.patient
+        patient: this.appointment.patient,
       });
     });
   }
 
   getPatients(): void {
-    this.patientsService.getAllPatients().subscribe(
+    this.patientsService.getAllPatientsByDoctor(+this.token.getId()).subscribe(
       (data) => (this.patients = data),
       (err) => console.log(err)
     );
@@ -108,6 +106,12 @@ export class FormAppointmentComponent implements OnInit {
       (data) => (this.doctors = data),
       (err) => console.log(err)
     );
+  }
+
+  getDoctor(): void {
+    this.doctorsService.getDoctor(+this.token.getId()).subscribe((data) => {
+      this.formAppointment.controls.doctor.setValue(data);
+    });
   }
   compare(object1: any, object2: any): boolean {
     return object1 == null ||

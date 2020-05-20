@@ -54,13 +54,13 @@ export class DoctorsService {
     err => console.log(err));
   }
   updateDoctor(Doctor: Doctor, id: number) {
-    console.log( id);
+
     const path = `${this.api}/doctors/${id}`;
     return this.http.put<Doctor>(path, Doctor);
   }
   deleteDoctor(Doctor: Doctor| number) {
     const id = typeof Doctor === 'number' ? Doctor : Doctor.id;
-    console.log(id);
+
     const path = `${this.api}/Doctors/${id}`;
     return this.http.delete(path);
   }

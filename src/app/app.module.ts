@@ -24,6 +24,7 @@ import { FormAppointmentComponent } from './Components/appointment/formAppointme
        AppointmentsComponent,
        FormAppointmentComponent
 
+
    ],
    imports: [
       BrowserModule,
@@ -31,7 +32,8 @@ import { FormAppointmentComponent } from './Components/appointment/formAppointme
       HttpClientModule,
       ReactiveFormsModule,
       BrowserModule,
-      FormsModule,
+      FormsModule
+
 
    ],
    providers: [HeaderComponent],

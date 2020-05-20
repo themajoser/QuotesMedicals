@@ -1,5 +1,6 @@
 <div class="card-head">
-  <h1>Crear Paciente</h1>
+  <h1 *ngIf="!this.id" >Crear Cita</h1>
+  <h1 *ngIf="this.id" >Editar Cita</h1>
 </div>
 <div class="card-body">
 
@@ -41,7 +42,7 @@
 
     <div class="form-group">
       <label>Fecha</label>
-      <input class="form-control" type="datetime-local" formControlName="date" />
+      <input class="form-control" ng-bind="date | date:'yyyy-MM-ddThh:mm'"  type="datetime-local" formControlName="date" />
       <div
         class="alert alert-danger"
         *ngIf="

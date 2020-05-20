@@ -27,7 +27,7 @@ export class TokenService {
   }
 
   public getId(): string {
-    return sessionStorage.getItem(ID_KEY);
+    return sessionStorage.getItem("AuthId");
   }
 
   public setUserName(userName: string): void {
@@ -60,6 +60,5 @@ export class TokenService {
 
   public logOut(): void {
     window.sessionStorage.clear();
-    console.log("Cerrado sesión");
   }
 }
