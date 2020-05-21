@@ -20,7 +20,7 @@
       <th scope="row">{{patient.id}}</th>
       <td>{{patient.name}}</td>
       <td>{{patient.lastname}}</td>
-      <td>{{patient.date_of_birth}}</td>
+      <td>{{patient.date_of_birth | date:"dd-MM-yyyy"}}</td>
       <td>
         <button type="button" routerLink="/patients/edit/{{patient.id}}" class="btn btn-info">Edit</button>
         <button type="button"  (click)="delete(patient)"  class="btn btn-danger">Delete</button>

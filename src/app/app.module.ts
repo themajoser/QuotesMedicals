@@ -13,7 +13,6 @@ import { FormsModule } from '@angular/forms';
 import { FormAppointmentComponent } from './Components/appointment/formAppointment.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSortModule} from '@angular/material/sort';
-import {MatPaginatorModule} from '@angular/material/paginator';
 import { NgSelectModule } from '@ng-select/ng-select';
 
 
@@ -44,7 +43,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 
 
    ],
-   providers: [HeaderComponent],
+   providers: [HeaderComponent, ],
    bootstrap: [
       AppComponent
    ]

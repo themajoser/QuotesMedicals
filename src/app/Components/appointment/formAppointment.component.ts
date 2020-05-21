@@ -11,7 +11,9 @@ import { AppointmentsService } from 'src/app/Services/appointment.service';
 import { Patient } from 'src/app/Interfaces/patient';
 import { Medicine } from 'src/app/Interfaces/medicine';
 import {formatDate} from '@angular/common';
-import { LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+
+
 @Component({
   selector: 'app-formappointment',
   templateUrl: './formAppointment.component.html',
@@ -92,13 +94,14 @@ export class FormAppointmentComponent implements OnInit {
     }
     this.appointmentService.getAppointment(this.id).subscribe((data) => {
       this.appointment = data;
+      console.log(this.appointment.date);
       this.formAppointment.patchValue({
         assement: this.appointment.assement,
         status: this.appointment.status,
-        date: formatDate(this.appointment.date,"yyyy-MM-ddThh:mm","en-US"),
+       date: formatDate(this.appointment.date, 'yyyy-MM-ddThh:mm', 'en-US'),
         doctor: this.appointment.doctor,
         patient: this.appointment.patient,
-        medicines:this.appointment.medicines
+        medicines: this.appointment.medicines
       });
 
     });

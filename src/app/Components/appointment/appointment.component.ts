@@ -31,7 +31,7 @@ export class AppointmentsComponent implements OnInit {
       const id = this.tokenService.getId();
       this.appointmentsService.getAppointmentsByDoctor( +id )
           .subscribe(Appointments => {this.appointments = Appointments;
-            this.sortedData = this.appointments.slice();
+                                      this.sortedData = this.appointments.slice();
           });
   }
 

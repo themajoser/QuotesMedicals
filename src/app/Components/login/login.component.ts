@@ -13,7 +13,6 @@ import { Routes } from '@angular/router';
 export class LoginComponent implements OnInit {
   title = 'login';
 
-  returnUrl: string;
   checkoutForm;
 
   constructor(private Login: LoginService,
@@ -30,7 +29,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
 
-    this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
+
   }
 
   onLogin(): void {
@@ -41,10 +40,11 @@ export class LoginComponent implements OnInit {
 
       this.tokenService.setId(String(data.id));
       this.tokenService.setRole(data.role);
-      this.router.navigateByUrl(this.returnUrl);
+
 
 
     });
+    this.router.navigateByUrl("/home");
   }
   }
 

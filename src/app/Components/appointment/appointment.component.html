@@ -20,7 +20,7 @@
       <th scope="row">{{appointment.id}}</th>
       <td>{{appointment.assement}}</td>
       <td>{{appointment.status}}</td>
-      <td>{{appointment.date | date:"dd-MM-yyyy hh:mm"}}</td>
+      <td>{{appointment.date | date:"dd-MM-yyyy"}}</td>
       <td>
         <button type="button" routerLink="/appointments/edit/{{appointment.id}}" class="btn btn-info">Edit</button>
         <button type="button"  (click)="delete(appointment)"  class="btn btn-danger">Delete</button>
