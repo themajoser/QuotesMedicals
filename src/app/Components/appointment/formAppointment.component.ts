@@ -9,10 +9,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DoctorsService } from 'src/app/Services/doctors.service';
 import { AppointmentsService } from 'src/app/Services/appointment.service';
 import { Patient } from 'src/app/Interfaces/patient';
-import { FormsModule } from '@angular/forms';
 import { Medicine } from 'src/app/Interfaces/medicine';
-
-
+import {formatDate} from '@angular/common';
+import { LOCALE_ID } from '@angular/core';
 @Component({
   selector: 'app-formappointment',
   templateUrl: './formAppointment.component.html',
@@ -96,12 +95,12 @@ export class FormAppointmentComponent implements OnInit {
       this.formAppointment.patchValue({
         assement: this.appointment.assement,
         status: this.appointment.status,
-        date: this.appointment.date,
+        date: formatDate(this.appointment.date,"yyyy-MM-ddThh:mm","en-US"),
         doctor: this.appointment.doctor,
         patient: this.appointment.patient,
         medicines:this.appointment.medicines
       });
-      console.log(data.medicines);
+
     });
 
   }
