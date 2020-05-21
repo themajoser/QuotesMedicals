@@ -6,21 +6,42 @@
 
   <form [formGroup]="formAppointment" (ngSubmit)="onSubmit()">
 
-
     <div class="form-group">
-      <label>Valoración</label>
-      <input class="form-control" type="text" formControlName="assement" />
+      <label>Paciente</label>
+      <select [compareWith]="compare" class="form-control" formControlName="patient">
+        <option [ngValue]="undefined" >Selecciona un rol</option>
+        <option *ngFor="let patient of patients" [ngValue]="patient">{{
+          patient.name
+        }}</option>
+      </select>
       <div
         class="alert alert-danger"
-        *ngIf="formulario.assement.errors && formulario.assement.touched"
+        *ngIf="formulario.patient.errors && formulario.patient.touched"
       >
-        <div>La valoración:</div>
-        <div *ngIf="formulario.assement.errors.required">No puede estar vacio</div>
-        <div *ngIf="formulario.assement.errors.minlength">
-          Deber contener más de 8 carácteres
+        <div>El Paciente:</div>
+        <div *ngIf="formulario.patient.errors.required">No puede estar vacio</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Doctor</label>
+      <select [compareWith]="compare" *ngIf="compare 'select'"  class="form-control" formControlName="doctor">
+        <option [ngValue]="undefined" >Selecciona un doctor</option>
+        <option *ngFor="let doctor of doctors" [ngValue]="doctor">{{
+          doctor.name
+        }}</option>
+      </select>
+      <div
+        class="alert alert-danger"
+        *ngIf="formulario.doctor.errors && formulario.doctor.touched"
+      >
+        <div>El doctor:</div>
+        <div *ngIf="formulario.doctor.errors.required">
+          No puede estar vacio
         </div>
       </div>
     </div>
+
 
 
 
@@ -56,41 +77,31 @@
       </div>
     </div>
 
+
+
     <div class="form-group">
-      <label>Paciente</label>
-      <select [compareWith]="compare" class="form-control" formControlName="patient">
-        <option [ngValue]="undefined" >Selecciona un rol</option>
-        <option *ngFor="let patient of patients" [ngValue]="patient">{{
-          patient.name
-        }}</option>
-      </select>
+      <label>Valoración</label>
+      <input class="form-control" type="text" formControlName="assement" />
       <div
         class="alert alert-danger"
-        *ngIf="formulario.patient.errors && formulario.patient.touched"
+        *ngIf="formulario.assement.errors && formulario.assement.touched"
       >
-        <div>El Paciente:</div>
-        <div *ngIf="formulario.patient.errors.required">No puede estar vacio</div>
+        <div>La valoración:</div>
+        <div *ngIf="formulario.assement.errors.required">No puede estar vacio</div>
+        <div *ngIf="formulario.assement.errors.minlength">
+          Deber contener más de 8 carácteres
+        </div>
       </div>
     </div>
 
     <div class="form-group">
-      <label>Doctor</label>
-      <select [compareWith]="compare" class="form-control" formControlName="doctor">
-        <option [ngValue]="undefined" >Selecciona un doctor</option>
-        <option *ngFor="let doctor of doctors" [ngValue]="doctor">{{
-          doctor.name
-        }}</option>
-      </select>
-      <div
-        class="alert alert-danger"
-        *ngIf="formulario.doctor.errors && formulario.doctor.touched"
-      >
-        <div>El doctor:</div>
-        <div *ngIf="formulario.doctor.errors.required">
-          No puede estar vacio
-        </div>
-      </div>
-    </div>
+      <label>Valoración</label>
+      <select [compareWith]="compare" class="form-control" formControlName="medicines" multiple class="selectpicker" data-live-search="true">
+      <option  [ngValue]="medicine"  *ngFor="let medicine of medicines">{{medicine.name}}</option>
+    </select>
+  </div>
+
+
 
 
 

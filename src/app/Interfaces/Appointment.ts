@@ -1,3 +1,4 @@
+import { Medicine } from './medicine';
 import { Doctor } from './doctor';
 import { Patient } from './patient';
 
@@ -8,4 +9,5 @@ export interface Appointment {
   date: Date;
   doctor: Doctor;
   patient: Patient;
+  medicines: Medicine;
 }

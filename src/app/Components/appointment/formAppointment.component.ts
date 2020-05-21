@@ -1,3 +1,4 @@
+import { MedicineService } from './../../Services/medicine.service';
 import { TokenService } from './../../Services/Token.service';
 import { PatientsService } from './../../Services/patients.service';
 import { Appointment } from '../../Interfaces/appointment';
@@ -9,6 +10,7 @@ import { DoctorsService } from 'src/app/Services/doctors.service';
 import { AppointmentsService } from 'src/app/Services/appointment.service';
 import { Patient } from 'src/app/Interfaces/patient';
 import { FormsModule } from '@angular/forms';
+import { Medicine } from 'src/app/Interfaces/medicine';
 
 
 @Component({
@@ -22,11 +24,13 @@ export class FormAppointmentComponent implements OnInit {
   roles: any;
   doctors: Doctor[];
   patients: Patient[];
+  medicines: Medicine[];
 
   constructor(
     private patientsService: PatientsService,
     private appointmentService: AppointmentsService,
     private doctorsService: DoctorsService,
+    private medicineService: MedicineService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private router: Router,
@@ -39,13 +43,17 @@ export class FormAppointmentComponent implements OnInit {
     this.getDoctors();
     this.getPatients();
 
+
+
     this.formAppointment = this.fb.group({
       assement: ['', [Validators.required, Validators.maxLength(255)]],
       status: ['', [Validators.required, Validators.maxLength(15)]],
       date: ['', [Validators.required]],
       patient: [, [Validators.required]],
       doctor: [this.getDoctor(), [Validators.required]],
+      medicines: [this.getMedicines(), [Validators.required]]
     });
+
     this.getAppointment();
   }
 
@@ -55,7 +63,7 @@ export class FormAppointmentComponent implements OnInit {
 
   onSubmit() {
     this.appointment = this.formAppointment.value;
-
+ 
     if (this.id) {
       this.update(this.appointment);
     }
@@ -103,6 +111,12 @@ export class FormAppointmentComponent implements OnInit {
   getDoctors(): void {
     this.doctorsService.getAllDoctors().subscribe(
       (data) => (this.doctors = data),
+      (err) => console.log(err)
+    );
+  }
+  getMedicines(): void {
+    this.medicineService.getAllMedicines().subscribe(
+      (data) => (this.medicines = data),
       (err) => console.log(err)
     );
   }

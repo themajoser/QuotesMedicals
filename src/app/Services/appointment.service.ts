@@ -62,6 +62,7 @@ export class AppointmentsService {
   updateAppointment(appointment: Appointment, id: number) {
 
     const path = `${this.api}/appointments/${id}`;
+    console.log(appointment);
     return this.http.put(path, appointment, this.httpOptions) .subscribe((data) => console.log(data),
     err => console.log(err));
   }
