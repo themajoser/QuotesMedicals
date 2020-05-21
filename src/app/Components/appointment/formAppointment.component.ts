@@ -55,6 +55,7 @@ export class FormAppointmentComponent implements OnInit {
     });
 
     this.getAppointment();
+
   }
 
   get formulario() {
@@ -63,7 +64,7 @@ export class FormAppointmentComponent implements OnInit {
 
   onSubmit() {
     this.appointment = this.formAppointment.value;
- 
+
     if (this.id) {
       this.update(this.appointment);
     }
@@ -98,8 +99,11 @@ export class FormAppointmentComponent implements OnInit {
         date: this.appointment.date,
         doctor: this.appointment.doctor,
         patient: this.appointment.patient,
+        medicines:this.appointment.medicines
       });
+      console.log(data.medicines);
     });
+
   }
 
   getPatients(): void {

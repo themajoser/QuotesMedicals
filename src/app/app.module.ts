@@ -14,6 +14,7 @@ import { FormAppointmentComponent } from './Components/appointment/formAppointme
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 
 
@@ -37,7 +38,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
       BrowserModule,
       FormsModule,
       BrowserAnimationsModule,
-      MatSortModule
+      MatSortModule,
+      NgSelectModule
 
 
    ],
