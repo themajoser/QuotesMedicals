@@ -37,14 +37,15 @@ export class LoginComponent implements OnInit {
     this.Login.login(this.checkoutForm.get('login').value , this.checkoutForm.get('password').value) .subscribe((data) => {
 
       this.tokenService.setUserName(data.login);
-
       this.tokenService.setId(String(data.id));
       this.tokenService.setRole(data.role);
+      this.router.navigate(["/home"]);
+
 
 
 
     });
-    this.router.navigateByUrl("/home");
+
   }
   }
 

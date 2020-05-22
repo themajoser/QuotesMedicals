@@ -1,3 +1,4 @@
+import { HomeComponent } from './Components/home/home.component';
 import { AppointmentsComponent } from './Components/appointment/appointment.component';
 import { HeaderComponent } from './Components/header/header.component';
 import { LoginComponent } from './Components/login/login.component';
@@ -26,7 +27,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
        LoginComponent,
        HeaderComponent,
        AppointmentsComponent,
-       FormAppointmentComponent
+       FormAppointmentComponent,
+       HomeComponent
 
 
    ],

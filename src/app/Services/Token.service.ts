@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 
 const TOKEN_KEY = 'AuthToken';
@@ -11,7 +12,7 @@ export class TokenService {
 
 
 
-  constructor() { }
+  constructor( private router: Router) { }
 
   public setToken(token: string): void {
     window.sessionStorage.removeItem(TOKEN_KEY);
@@ -19,15 +20,15 @@ export class TokenService {
   }
 
   public getToken(): string {
-    return sessionStorage.getItem("AuthId");
+    return sessionStorage.getItem('AuthId');
   }
   public setId(id: string): void {
     window.sessionStorage.removeItem(ID_KEY);
-    window.sessionStorage.setItem("AuthId", id);
+    window.sessionStorage.setItem('AuthId', id);
   }
 
   public getId(): string {
-    return sessionStorage.getItem("AuthId");
+    return sessionStorage.getItem('AuthId');
   }
 
   public setUserName(userName: string): void {
@@ -48,17 +49,30 @@ export class TokenService {
     return sessionStorage.getItem(ROLE_KEY);
   }
 
-  public isAuthorized(code: string):boolean{
-    return this.getRole() === code;
+  public isAuthorized(roles: string[]): boolean{
+        roles.forEach(element => {
+
+          if ( this.getRole() === element){
+            console.log(element);
+              return false;
+            }
+          if ( this.getRole() === 'admin'){
+              return false;
+            }
+        });
+
+        return true;
   }
 
 
   public isUserLoggedIn() {
-    const user = sessionStorage.getItem("AuthUserName");
+    const user = sessionStorage.getItem('AuthUserName');
     return user != null;
   }
 
   public logOut(): void {
+
     window.sessionStorage.clear();
+    this.router.navigate(['/login']);
   }
 }
