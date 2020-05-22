@@ -13,16 +13,24 @@ const routes: Routes = [
 
   { path: 'login', component: LoginComponent  },
 
+
   {
     path: '',
     component: MainComponent,
-    
+
+
     children: [
       {
         path: 'patients',
         component: PatientsComponent,
         canActivate: [AuthGuard],
         data: { roleCode: ['doctor'] },
+      },
+      {
+        path: 'home',
+        component: HomeComponent,
+        canActivate: [AuthGuard],
+        data: { roleCode: ['doctor', 'patient'] },
       },
       {
         path: 'patients/create',
@@ -36,12 +44,6 @@ const routes: Routes = [
         component: AppointmentsComponent,
         canActivate: [AuthGuard],
         data: { roleCode: ['doctor'] },
-      },
-      {
-        path: 'home',
-        component: HomeComponent,
-        canActivate: [AuthGuard],
-        data: { roleCode: ['doctor', 'patient'] },
       },
       {
         path: 'appointments/create',

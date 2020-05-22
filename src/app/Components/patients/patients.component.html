@@ -1,7 +1,7 @@
-<div class="card-head">
+<div class="card-head text-muted ml-4 ">
   <h1>Pacientes</h1>
 </div>
-<div class="card-body">
+<div class="card-body ">
   <div class="float-right mb-3">
     <button type="button" routerLink="/patients/create"   class="btn btn-info">Crear nuevo paciente</button>
   </div>
@@ -9,9 +9,9 @@
   <thead>
     <tr>
       <th mat-sort-header="id" pacients>id</th>
-      <th mat-sort-header="name" pacients>Name</th>
-      <th mat-sort-header="lastname" pacients>LastName</th>
-      <th mat-sort-header="date_of_birth" pacients>Date of birth</th>
+      <th mat-sort-header="name" pacients>Nombre</th>
+      <th mat-sort-header="lastname" pacients>Apellidos</th>
+      <th mat-sort-header="date_of_birth" pacients>Fecha de nacimiento</th>
       <th></th>
     </tr>
   </thead>
@@ -22,8 +22,8 @@
       <td>{{patient.lastname}}</td>
       <td>{{patient.date_of_birth | date:"dd-MM-yyyy"}}</td>
       <td>
-        <button type="button" routerLink="/patients/edit/{{patient.id}}" class="btn btn-info">Edit</button>
-        <button type="button"  (click)="delete(patient)"  class="btn btn-danger">Delete</button>
+        <button type="button" routerLink="/patients/edit/{{patient.id}}" class="btn btn-info"> <i class="far fa-edit"></i></button>
+        <button type="button"  (click)="delete(patient)"  class="btn btn-danger"> <i class="far fa-trash-alt"></i></button>
       </td>
     </tr>
   </tbody>

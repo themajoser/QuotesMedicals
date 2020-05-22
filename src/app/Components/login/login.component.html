@@ -12,12 +12,13 @@
 
 
           <div class="card-body">
-            <h1 class="card-title ">Quotes Medical</h1><hr>
+
+            <h1 class="card-title ">  Quotes Medicals</h1><hr>
             <h5 class="card-title ">Inicia Sesión</h5>
             <form  class="form-signin" [formGroup]="checkoutForm" (ngSubmit)="onLogin()">
               <div class="input-group mb-2 ">
                 <div class="input-group-prepend">
-                  <div class="input-group-text">@</div>
+                  <div class="input-group-text"><i class="far fa-user"></i></div>
                 </div>
                 <input type="text"  formControlName="login" id="login" class="form-control rounded_corner" placeholder="Username" required autofocus>
 
@@ -25,7 +26,7 @@
 
               <div class="input-group mb-2">
                 <div class="input-group-prepend">
-                  <div class="input-group-text">#</div>
+                  <div class="input-group-text"><i class="fas fa-key"></i></div>
                 </div>
                 <input type="password" id="inputPassword" formControlName="password" class="form-control rounded_corner" placeholder="Password" required>
 

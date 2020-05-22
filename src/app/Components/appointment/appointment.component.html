@@ -1,4 +1,4 @@
-<div class="card-head">
+<div class="card-head text-muted ml-4">
   <h1>Citas </h1>
 </div>
 <div class="card-body">
@@ -9,9 +9,9 @@
   <thead>
     <tr>
       <th mat-sort-header="id" >Id</th>
-      <th mat-sort-header="assement" >Assement</th>
-      <th  mat-sort-header="status" >Status</th>
-      <th mat-sort-header="date" >Date</th>
+      <th mat-sort-header="assement" >Valoración</th>
+      <th  mat-sort-header="status" >Estado</th>
+      <th mat-sort-header="date" >Fecha</th>
       <th></th>
     </tr>
   </thead>
@@ -22,8 +22,8 @@
       <td>{{appointment.status}}</td>
       <td>{{appointment.date | date:"dd-MM-yyyy"}}</td>
       <td>
-        <button type="button" routerLink="/appointments/edit/{{appointment.id}}" class="btn btn-info">Edit</button>
-        <button type="button"  (click)="delete(appointment)"  class="btn btn-danger">Delete</button>
+        <button type="button" routerLink="/appointments/edit/{{appointment.id}}" class="btn btn-info"> <i class="far fa-edit"></i></button>
+        <button type="button"  (click)="delete(appointment)"  class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
       </td>
     </tr>
   </tbody>

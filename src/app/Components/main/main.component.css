@@ -1,4 +1,16 @@
-.card-body
-{
-  background-color: blue;
+body,html{
+  margin: 0;
+  padding: 0;
 }
+
+.bg-custom-2,body,html
+{
+  background-color:#F2F2F2;
+}
+footer
+{
+  background-image:#F2F2F2;
+
+  /* background-image: linear-gradient(to bottom, #92dbd3 0%, #2695a8 100%); */
+}
+

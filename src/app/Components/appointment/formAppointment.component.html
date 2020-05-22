@@ -1,9 +1,9 @@
 
-<div class="card-head">
+<div class="card-head text-muted pl-2">
   <h1 *ngIf="!this.id" >Crear Cita</h1>
   <h1 *ngIf="this.id" >Editar Cita</h1>
 </div>
-<div class="card-body">
+<div class="card-body pl-4">
 
   <form [formGroup]="formAppointment" (ngSubmit)="onSubmit()">
 

@@ -1,13 +1,37 @@
+<html>
+  <head></head>
+  <body>
+
 <div *ngIf="tokenService.isUserLoggedIn()">
   <app-header></app-header>
-  </div>
+</div>
+<div class="bg-custom-2">
   <div class="container">
-    <div class="row ">
+    <div class="row">
       <div class="col-lg">
-        <div class="card  bg-light">
+        <div class="card">
           <router-outlet></router-outlet>
         </div>
       </div>
     </div>
   </div>
 
+
+<!-- Footer -->
+<footer class="page-footer font-small ">
+  <!-- Footer Elements -->
+  <div class="col-md-12 py-5">
+    </div>
+
+  <!-- Footer Elements -->
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center   ">
+    © 2020 Copyright:
+    <a href="#"> JORGE ORENES RUBIO</a>
+  </div>
+  <!-- Copyright -->
+</footer>
+</div>
+</body>
+</html>
