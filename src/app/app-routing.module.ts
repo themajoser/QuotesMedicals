@@ -17,7 +17,8 @@ const routes: Routes = [
 { path: 'appointments/create', component: FormAppointmentComponent, canActivate: [AuthGuard], data: {roleCode: ['doctor']} },
 { path: 'appointments/edit/:id', component: FormAppointmentComponent },
    { path: 'login', component: LoginComponent },
-  { path: 'home', component: HomeComponent, canActivate: [AuthGuard], data: {roleCode: ['doctor', 'patient']} }
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard], data: {roleCode: ['doctor', 'patient']} },
+  { path: '',  redirectTo: '/home', pathMatch: 'full'},
 ];
 
 @NgModule({
