@@ -4,11 +4,11 @@ import { LoginService } from '../../Services/Login.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { Routes } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html'
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
   title = 'login';
@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
       this.tokenService.setUserName(data.login);
       this.tokenService.setId(String(data.id));
       this.tokenService.setRole(data.role);
-      this.router.navigate(["/home"]);
+      this.router.navigateByUrl("home");
 
 
 

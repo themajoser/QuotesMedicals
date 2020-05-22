@@ -1,18 +1,46 @@
 
 
 
-<form  class="form-signin" [formGroup]="checkoutForm" (ngSubmit)="onLogin()">
-  <img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-  <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-  <label for="inputEmail" class="sr-only">Email address</label>
-  <input type="text"  formControlName="login" id="login" class="form-control" placeholder="Username" required autofocus>
-  <label for="inputPassword" class="sr-only">Password</label>
-  <input type="password" id="inputPassword" formControlName="password" class="form-control" placeholder="Password" required>
-  <div class="checkbox mb-3">
-    <label>
-      <input type="checkbox" value="remember-me"> Remember me
-    </label>
+
+
+<body>
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-sm-9 col-md-7 col-lg-4 mx-auto  ">
+        <div class="card card-signin mt-5   ">
+
+
+
+          <div class="card-body">
+            <h1 class="card-title ">Quotes Medical</h1><hr>
+            <h5 class="card-title ">Inicia Sesión</h5>
+            <form  class="form-signin" [formGroup]="checkoutForm" (ngSubmit)="onLogin()">
+              <div class="input-group mb-2 ">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">@</div>
+                </div>
+                <input type="text"  formControlName="login" id="login" class="form-control rounded_corner" placeholder="Username" required autofocus>
+
+              </div>
+
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">#</div>
+                </div>
+                <input type="password" id="inputPassword" formControlName="password" class="form-control rounded_corner" placeholder="Password" required>
+
+              </div>
+
+              <div class="custom-control custom-checkbox mb-3">
+                <input type="checkbox" class="custom-control-input" id="customCheck1">
+                <label class="custom-control-label" for="customCheck1">Remember password</label>
+              </div>
+              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
+              <hr class="my-4">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-  <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
-</form>
+</body>

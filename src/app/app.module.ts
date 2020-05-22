@@ -1,3 +1,4 @@
+import { MainComponent } from './Components/main/main.component';
 import { HomeComponent } from './Components/home/home.component';
 import { AppointmentsComponent } from './Components/appointment/appointment.component';
 import { HeaderComponent } from './Components/header/header.component';
@@ -28,7 +29,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
        HeaderComponent,
        AppointmentsComponent,
        FormAppointmentComponent,
-       HomeComponent
+       HomeComponent,
+       MainComponent
 
 
    ],
@@ -45,7 +47,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 
 
    ],
-   providers: [HeaderComponent, ],
+   providers: [HeaderComponent ],
    bootstrap: [
       AppComponent
    ]
