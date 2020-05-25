@@ -19,6 +19,7 @@ import {MatSortModule} from '@angular/material/sort';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ToastrModule } from 'ngx-toastr';
 import { AppointmentsPatientComponent } from './Components/patients/appointment/appointmentPatient.component';
+import { MedicinesComponent } from './Components/medicines/medicines.component';
 
 
 
@@ -34,7 +35,8 @@ import { AppointmentsPatientComponent } from './Components/patients/appointment/
        HomeComponent,
        MainComponent,
        AppointmentsPatientComponent,
-       FormAppointmentPatientComponent
+       FormAppointmentPatientComponent,
+       MedicinesComponent
 
 
    ],

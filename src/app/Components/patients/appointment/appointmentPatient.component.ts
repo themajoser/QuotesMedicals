@@ -27,10 +27,10 @@ export class AppointmentsPatientComponent implements OnInit {
 
   ngOnInit() {
     this.getAppointmentsByPatient();
-    
+
   }
-  showToaster(nombre: string) {
-    this.toastr.success('Has eliminado la cita con ' + nombre + ' exitosamente');
+  showToaster() {
+    this.toastr.success('Has eliminado la cita exitosamente');
   }
 
 
@@ -47,7 +47,7 @@ export class AppointmentsPatientComponent implements OnInit {
   delete(appointment: Appointment): void {
     this.appointments = this.appointments.filter(h => h !== appointment);
     this.appointmentsService.deleteAppointment(appointment).subscribe();
-    this.showToaster(appointment.patient.name);
+    this.showToaster();
   }
   sortData(sort: Sort) {
     const data = this.appointments.slice();

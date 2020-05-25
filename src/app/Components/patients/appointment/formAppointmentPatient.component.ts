@@ -15,7 +15,7 @@ import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
-  selector: 'app-formappointmentPatient',
+  selector: 'app-formAppointmentPatient',
   templateUrl: './formAppointmentPatient.component.html',
 })
 export class FormAppointmentPatientComponent implements OnInit {
@@ -84,20 +84,20 @@ export class FormAppointmentPatientComponent implements OnInit {
     }
 
     this.appointmentService.createAppointment(appointment);
-    this.showToasterAdd(appointment.patient.name);
+    this.showToasterAdd();
 
   }
 
   update(appointment: Appointment): void {
-    this.showToasterUpdate(appointment.patient.name);
+    this.showToasterUpdate();
     this.appointmentService.updateAppointment(appointment, this.id);
   }
 
-showToasterUpdate(nombre:string){
-  this.toastr.success('Has editado la cita con  '+ nombre +' exitosamente.');
+showToasterUpdate(){
+  this.toastr.success('Has editado la cita exitosamente.');
 }
-showToasterAdd(nombre:string){
-  this.toastr.success('Has añadido la cita con  '+ nombre +' exitosamente.');
+showToasterAdd(){
+  this.toastr.success('Has añadido la cita  exitosamente.');
 }
 
   getAppointment(): void {

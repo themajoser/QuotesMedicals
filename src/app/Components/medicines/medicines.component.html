@@ -1,0 +1,33 @@
+<div class="card-head text-muted ml-4">
+  <h1>Medicamentos </h1>
+</div>
+<div class="card-body">
+  <div class="float-right mb-3">
+  <!-- <button type="button" routerLink="/medicine/create"   class="btn btn-info">Crear nueva cita</button> -->
+</div>
+<table class="table table-hover"  matSort (matSortChange)="sortData($event)">
+  <thead>
+    <tr>
+      <th mat-sort-header="id" >Id</th>
+      <th mat-sort-header="name" >Nombre</th>
+      <th  mat-sort-header="brand" >Marca</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody >
+    <tr  *ngFor="let medicine of sortedData">
+      <th scope="row">{{medicine.id}}</th>
+      <td>{{medicine.name}}</td>
+      <td>{{medicine.brand}}</td>
+      <td   *ngIf="tokenService.getRole()==='admin'">
+
+        <!-- <button type="button" routerLink="/medicines/edit/{{medicine.id}}" class="btn btn-info"> <i class="far fa-edit"></i></button>-->
+        <button type="button"  (click)="delete(medicine)"  class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+
+      </td>
+    </tr>
+  </tbody>
+
+</table>
+
+</div>

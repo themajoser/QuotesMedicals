@@ -11,6 +11,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { FormPatientComponent } from './Components/patients/formpatient.component';
 import { PatientsComponent } from './Components/patients/patients.component';
 import { LoginComponent } from './Components/login/login.component';
+import { MedicinesComponent } from './Components/medicines/medicines.component';
 
 const routes: Routes = [
 
@@ -63,6 +64,12 @@ const routes: Routes = [
       {
         path: 'appointment/create',
         component: FormAppointmentComponent,
+        canActivate: [AuthGuard],
+        data: { roleCode: ['doctor'] },
+      },
+      {
+        path: 'medicines',
+        component: MedicinesComponent,
         canActivate: [AuthGuard],
         data: { roleCode: ['doctor'] },
       },
