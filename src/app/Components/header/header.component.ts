@@ -10,11 +10,11 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
   constructor(private Login: LoginService, public tokenService: TokenService) { }
-
+          nombre = this.tokenService.getUserName();
   ngOnInit() {
-    $('a#exit.btn.btn-primary.btn-danger.text-white').click(function(){
-      $('div.modal-backdrop.fade.show').removeClass('modal-backdrop fade show')
-    });
+    // $('a#exit.btn.btn-primary.btn-danger.text-white').click(function(){
+    //   $('div.modal-backdrop.fade.show').removeClass('modal-backdrop fade show')
+    // });
   }
 
 }

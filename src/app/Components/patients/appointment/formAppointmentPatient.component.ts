@@ -1,8 +1,8 @@
-import { MedicineService } from './../../Services/medicine.service';
-import { TokenService } from './../../Services/Token.service';
-import { PatientsService } from './../../Services/patients.service';
-import { Appointment } from '../../Interfaces/appointment';
-import { Doctor } from '../../Interfaces/doctor';
+import { MedicineService } from './../../../Services/medicine.service';
+import { TokenService } from './../../../Services/Token.service';
+import { PatientsService } from './../../../Services/patients.service';
+import { Appointment } from './../../../Interfaces/Appointment';
+import { Doctor } from './../../../Interfaces/doctor';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -15,10 +15,10 @@ import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
-  selector: 'app-formappointment',
-  templateUrl: './formAppointment.component.html',
+  selector: 'app-formappointmentPatient',
+  templateUrl: './formAppointmentPatient.component.html',
 })
-export class FormAppointmentComponent implements OnInit {
+export class FormAppointmentPatientComponent implements OnInit {
   appointment: Appointment;
   id: number;
   formAppointment: FormGroup;
@@ -49,11 +49,11 @@ export class FormAppointmentComponent implements OnInit {
 
     this.formAppointment = this.fb.group({
       assement: ['', [Validators.required, Validators.maxLength(255)]],
-      status: ['', [Validators.required, Validators.maxLength(15)]],
+      status: ['SIN CONFIRMAR', [Validators.required, Validators.maxLength(15)]],
       date: ['', [Validators.required]],
       patient: [, [Validators.required]],
-      doctor: [this.getDoctor(), [Validators.required]],
-      medicines: [this.getMedicines(), [Validators.required]]
+      doctor: [this.getPatient(), {disabled: true} ,[Validators.required]],
+      medicines: [null]
     });
 
     this.getAppointment();
@@ -75,13 +75,14 @@ export class FormAppointmentComponent implements OnInit {
       this.add(this.appointment);
     }
 
-    this.router.navigate(['/appointments']);
+    this.router.navigate(['/appointmentsPatient']);
   }
 
   add(appointment: Appointment): void {
     if (this.formAppointment.invalid) {
       return;
     }
+
     this.appointmentService.createAppointment(appointment);
     this.showToasterAdd(appointment.patient.name);
 
@@ -105,7 +106,6 @@ showToasterAdd(nombre:string){
     }
     this.appointmentService.getAppointment(this.id).subscribe((data) => {
       this.appointment = data;
-      console.log(this.appointment.date);
       this.formAppointment.patchValue({
         assement: this.appointment.assement,
         status: this.appointment.status,
@@ -120,7 +120,7 @@ showToasterAdd(nombre:string){
   }
 
   getPatients(): void {
-    this.patientsService.getAllPatientsByDoctor(+this.token.getId()).subscribe(
+    this.patientsService.getAllPatients().subscribe(
       (data) => (this.patients = data),
       (err) => console.log(err)
     );
@@ -133,15 +133,19 @@ showToasterAdd(nombre:string){
   }
   getMedicines(): void {
     this.medicineService.getAllMedicines().subscribe(
-      (data) => {this.medicines = data;
-      console.log(data)},
+      (data) => (this.medicines = data),
       (err) => console.log(err)
     );
   }
 
-  getDoctor(): void {
-    this.doctorsService.getDoctor(+this.token.getId()).subscribe((data) => {
-      this.formAppointment.controls.doctor.setValue(data);
+  getPatient(): void {
+    this.patientsService.getPatient(+this.token.getId()).subscribe((data) => {
+      this.formAppointment.controls.doctor.setValue(data.doctor);
+      this.formAppointment.controls.patient.setValue(data);
+      // this.formAppointment.get('patient').disable();
+      // this.formAppointment.get('doctor').disable();
+      // this.formAppointment.get('medicines').disable();
+      // this.formAppointment.get('status').disable();
     });
   }
   compare(object1: any, object2: any): boolean {

@@ -1,9 +1,13 @@
-import { AppointmentsService } from './../../Services/appointment.service';
-import { LoginService } from './../../Services/Login.service';
-import { HeaderComponent } from './../header/header.component';
-import { Appointment } from './../../Interfaces/Appointment';
+import { AppointmentsService } from 'src/app/Services/appointment.service';
+import { LoginService } from '../../../Services/Login.service';
+import { TokenService } from '../../../Services/Token.service';
+import { Appointment } from '../../../Interfaces/Appointment';
+
+
+
+
 import { Component, OnInit } from '@angular/core';
-import { TokenService } from './../../Services/Token.service';
+
 import { Sort } from '@angular/material/sort';
 import { ToastrService } from 'ngx-toastr';
 
@@ -11,7 +15,7 @@ import { ToastrService } from 'ngx-toastr';
   selector: 'app-appointments',
   templateUrl: './appointment.component.html',
 })
-export class AppointmentsComponent implements OnInit {
+export class AppointmentsPatientComponent implements OnInit {
   appointments: Appointment[];
   sortedData: Appointment[];
   constructor(
@@ -22,21 +26,18 @@ export class AppointmentsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getAppointmentsByDoctor();
+    this.getAppointmentsByPatient();
+    
   }
   showToaster(nombre: string) {
     this.toastr.success('Has eliminado la cita con ' + nombre + ' exitosamente');
   }
 
-  getAppointments(): void {
-    this.appointmentsService
-      .getAllAppointments()
-      .subscribe((Appointments) => [(this.appointments = Appointments)]);
-  }
-  getAppointmentsByDoctor(): void {
+
+  getAppointmentsByPatient(): void {
     const id = this.tokenService.getId();
     this.appointmentsService
-      .getAppointmentsByDoctor(+id)
+      .getAppointmentsByPatient(+id)
       .subscribe((Appointments) => {
         this.appointments = Appointments;
         this.sortedData = this.appointments.slice();

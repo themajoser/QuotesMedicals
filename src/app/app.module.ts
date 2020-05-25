@@ -1,3 +1,4 @@
+import { FormAppointmentPatientComponent } from './Components/patients/appointment/formAppointmentPatient.component';
 import { MainComponent } from './Components/main/main.component';
 import { HomeComponent } from './Components/home/home.component';
 import { AppointmentsComponent } from './Components/appointment/appointment.component';
@@ -16,7 +17,8 @@ import { FormAppointmentComponent } from './Components/appointment/formAppointme
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSortModule} from '@angular/material/sort';
 import { NgSelectModule } from '@ng-select/ng-select';
-
+import { ToastrModule } from 'ngx-toastr';
+import { AppointmentsPatientComponent } from './Components/patients/appointment/appointmentPatient.component';
 
 
 
@@ -30,7 +32,9 @@ import { NgSelectModule } from '@ng-select/ng-select';
        AppointmentsComponent,
        FormAppointmentComponent,
        HomeComponent,
-       MainComponent
+       MainComponent,
+       AppointmentsPatientComponent,
+       FormAppointmentPatientComponent
 
 
    ],
@@ -43,7 +47,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
       FormsModule,
       BrowserAnimationsModule,
       MatSortModule,
-      NgSelectModule
+      NgSelectModule,
+      ToastrModule.forRoot()
 
 
    ],

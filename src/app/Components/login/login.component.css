@@ -4,8 +4,9 @@
 }
 
 body {
-  background: #F3F5F9;
-  background: linear-gradient(to left, #F3F5F9, #33AEFF);
+  /* background: #F3F5F9; */
+  /* background: linear-gradient(to left, #F3F5F9, #33AEFF); */
+  background-image: url("../../../assets/fotos/jorge.jpg");
 }
 
 .card-signin {

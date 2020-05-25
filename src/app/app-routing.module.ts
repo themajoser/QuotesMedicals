@@ -1,3 +1,6 @@
+import { FormAppointmentComponent } from './Components/appointment/formAppointment.component';
+import { FormAppointmentPatientComponent } from './Components/patients/appointment/formAppointmentPatient.component';
+import { AppointmentsPatientComponent } from './Components/patients/appointment/appointmentPatient.component';
 import { HeaderComponent } from './Components/header/header.component';
 import { MainComponent } from './Components/main/main.component';
 import { HomeComponent } from './Components/home/home.component';
@@ -8,7 +11,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { FormPatientComponent } from './Components/patients/formpatient.component';
 import { PatientsComponent } from './Components/patients/patients.component';
 import { LoginComponent } from './Components/login/login.component';
-import { FormAppointmentComponent } from './Components/appointment/formAppointment.component';
+
 const routes: Routes = [
 
   { path: 'login', component: LoginComponent  },
@@ -46,7 +49,19 @@ const routes: Routes = [
         data: { roleCode: ['doctor'] },
       },
       {
+        path: 'appointmentsPatient',
+        component: AppointmentsPatientComponent,
+        canActivate: [AuthGuard],
+        data: { roleCode: ['patient'] },
+      },
+      {
         path: 'appointments/create',
+        component: FormAppointmentPatientComponent,
+        canActivate: [AuthGuard],
+        data: { roleCode: ['patient'] },
+      },
+      {
+        path: 'appointment/create',
         component: FormAppointmentComponent,
         canActivate: [AuthGuard],
         data: { roleCode: ['doctor'] },

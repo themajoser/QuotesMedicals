@@ -33,6 +33,12 @@ export class AppointmentsService {
     }
     return false;
 }
+  /** GET heroes from the server */
+  getAppointmentsByPatient(id: number): Observable<Appointment[]>  {
+    const path = `${this.api}/appointments/patient/${id}`;
+
+    return this.http.get<Appointment[]>(path ) ;
+  }
 
   /** GET heroes from the server */
   getAppointmentsByDoctor(id: number): Observable<Appointment[]>  {

@@ -4,6 +4,7 @@ import { PatientsService } from './../../Services/patients.service';
 import { Patient } from './../../Interfaces/patient';
 import { Component, OnInit } from '@angular/core';
 import {Sort} from '@angular/material/sort';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-patients',
   templateUrl: './patients.component.html',
@@ -12,10 +13,13 @@ export class PatientsComponent implements OnInit {
   patients: Patient[];
   sortedData: Patient[];
 
-  constructor(private patientsService: PatientsService, private Login: LoginService, private token: TokenService ) { }
+  constructor(private patientsService: PatientsService, private token: TokenService, private toastr: ToastrService ) { }
 
   ngOnInit() {
     this.getPatientsByDoctor();
+  }
+  showToaster(nombre: string) {
+    this.toastr.success('Has eliminado el paciente ' + nombre + ' exitosamente');
   }
   getPatients(): void {
     this.patientsService.getAllPatients()
@@ -24,13 +28,15 @@ export class PatientsComponent implements OnInit {
   getPatientsByDoctor(): void {
     this.patientsService.getAllPatientsByDoctor(+this.token.getId())
     .subscribe(Patients => {this.patients = Patients;
-      this.sortedData = this.patients.slice();});
+                            this.sortedData = this.patients.slice();});
 
   }
 
   delete(patient: Patient): void {
+    this.showToaster(patient.login);
     this.patients = this.patients.filter(h => h !== patient);
     this.patientsService.deletePatient(patient).subscribe();
+
   }
   sortData(sort: Sort) {
     const data = this.patients.slice();

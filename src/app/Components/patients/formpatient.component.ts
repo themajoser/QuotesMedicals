@@ -6,7 +6,7 @@ import { PatientsService } from '../../Services/patients.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DoctorsService } from 'src/app/Services/doctors.service';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-formpatient',
   templateUrl: './formpatient.component.html',
@@ -24,7 +24,8 @@ export class FormPatientComponent implements OnInit {
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private router: Router,
-    private token: TokenService
+    private token: TokenService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit() {
@@ -46,7 +47,7 @@ export class FormPatientComponent implements OnInit {
       role: ['', [Validators.required]],
       doctor: ['', [Validators.required]],
     });
-    this.getHero();
+    this.getPatient();
   }
 
   get formulario() {
@@ -74,14 +75,21 @@ export class FormPatientComponent implements OnInit {
       return;
     }
     this.patientsService.createPatient(patient);
+    this.showToasterAdd(patient.login);
   }
 
   update(patient: Patient): void {
-
+    this.showToasterUpdate(patient.login);
     this.patientsService.updatePatient(patient, this.id);
   }
+  showToasterUpdate(nombre:string){
+    this.toastr.success('Has editado el paciente  '+ nombre +' exitosamente.');
+  }
+  showToasterAdd(nombre:string){
+    this.toastr.success('Has añadido el paciente  '+ nombre +' exitosamente.');
+  }
 
-  getHero(): void {
+  getPatient(): void {
     if (!this.id) {
       return;
     }

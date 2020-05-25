@@ -29,11 +29,11 @@
     </ng-container >
     <ng-container *ngIf="tokenService.isUserLoggedIn() && tokenService.getRole()=='patient' ">
       <li class="nav-item" [routerLinkActive]="['active']">
-        <a class="nav-link" routerLink="/patients">Mirar citas</a>
+        <a class="nav-link" routerLink="/appointmentsPatient">Mirar citas</a>
       </li>
 
       <li class="nav-item" [routerLinkActive]="['active']">
-        <a class="nav-link" routerLink="/patients/create">Crear cita</a>
+        <a class="nav-link" routerLink="/appointments/create">Crear cita</a>
       </li>
     </ng-container >
     </ul>
