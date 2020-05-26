@@ -16,6 +16,7 @@ export class MedicinesComponent implements OnInit {
   role:String;
   medicines: Medicine[];
   sortedData: Medicine[];
+  filterPost = '';
   constructor(
     private medicinesService: MedicineService,
     private Login: LoginService,

@@ -1,3 +1,4 @@
+import { FilterPipe } from './../pipes/filter.pipe';
 import { FormAppointmentPatientComponent } from './Components/patients/appointment/formAppointmentPatient.component';
 import { MainComponent } from './Components/main/main.component';
 import { HomeComponent } from './Components/home/home.component';
@@ -36,7 +37,8 @@ import { MedicinesComponent } from './Components/medicines/medicines.component';
        MainComponent,
        AppointmentsPatientComponent,
        FormAppointmentPatientComponent,
-       MedicinesComponent
+       MedicinesComponent,
+       FilterPipe
 
 
    ],

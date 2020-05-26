@@ -12,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 export class PatientsComponent implements OnInit {
   patients: Patient[];
   sortedData: Patient[];
+  filterPost = '';
 
   constructor(private patientsService: PatientsService, private token: TokenService, private toastr: ToastrService ) { }
 

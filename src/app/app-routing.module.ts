@@ -71,7 +71,7 @@ const routes: Routes = [
         path: 'medicines',
         component: MedicinesComponent,
         canActivate: [AuthGuard],
-        data: { roleCode: ['doctor'] },
+        data: { roleCode: ['doctor','admin'] },
       },
       { path: 'appointments/edit/:id', component: FormAppointmentComponent },
     ],

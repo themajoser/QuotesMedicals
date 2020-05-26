@@ -5,6 +5,9 @@
   <div class="float-right mb-3">
   <!-- <button type="button" routerLink="/medicine/create"   class="btn btn-info">Crear nueva cita</button> -->
 </div>
+<div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4">
+  <input type="text" class="form-control border-0 bg-light" name="filterPost" placeholder="Buscar..." [(ngModel)]="filterPost">
+</div>
 <table class="table table-hover"  matSort (matSortChange)="sortData($event)">
   <thead>
     <tr>
@@ -15,7 +18,7 @@
     </tr>
   </thead>
   <tbody >
-    <tr  *ngFor="let medicine of sortedData">
+    <tr  *ngFor="let medicine of sortedData | filter:filterPost">
       <th scope="row">{{medicine.id}}</th>
       <td>{{medicine.name}}</td>
       <td>{{medicine.brand}}</td>
