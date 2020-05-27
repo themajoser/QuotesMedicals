@@ -12,30 +12,34 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 })
 export class LoginComponent implements OnInit {
   title = 'login';
+  checkoutForm: FormGroup;
+  formValido;
 
-  checkoutForm;
 
   constructor(private Login: LoginService,
               private tokenService: TokenService,
               private route: ActivatedRoute,
               private router: Router,
-              private formBuilder: FormBuilder,
+              private fb: FormBuilder,
     ) {
-      this.checkoutForm   = new FormGroup({
-        login:  new FormControl(''),
-        password:  new FormControl(''),
-      });
+
      }
 
   ngOnInit() {
-
-
+    this.checkoutForm   = this.fb.group({
+      login:  [, [Validators.required]],
+      password:   [, [Validators.required]]
+    });
+    this.formValido=true;
+  }
+  get formulario() {
+    return this.checkoutForm.controls;
   }
 
   onLogin(): void {
-
-    this.Login.login(this.checkoutForm.get('login').value , this.checkoutForm.get('password').value) .subscribe((data) => {
-
+    if (this.checkoutForm.valid) {
+    this.Login.login(this.checkoutForm.get('login').value , this.checkoutForm.get('password').value).subscribe(
+      (data) => {
       this.tokenService.setUserName(data.login);
       this.tokenService.setId(String(data.id));
       this.tokenService.setRole(data.role);
@@ -44,9 +48,15 @@ export class LoginComponent implements OnInit {
 
 
 
-    });
+    },
+    errorResponse => {
+      // Login Error
+     this.formValido=errorResponse;
+    this.formValido=false;
 
+  });
+}
   }
-  }
+}
 
 

@@ -6,7 +6,7 @@
 <div class="card-body pl-4">
 
   <form [formGroup]="formAppointment" (ngSubmit)="onSubmit()">
-
+<!-- 
     <div class="form-group">
       <label>Paciente</label>
       <select [compareWith]="compare" class="form-control" formControlName="patient">
@@ -22,9 +22,9 @@
         <div>El Paciente:</div>
         <div *ngIf="formulario.patient.errors.required">No puede estar vacio</div>
       </div>
-    </div>
+    </div> -->
 
-    <div class="form-group">
+    <!-- <div class="form-group">
       <label>Doctor</label>
       <select [compareWith]="compare" *ngIf="compare 'select'"  class="form-control" formControlName="doctor">
         <option [ngValue]="undefined" >Selecciona un doctor</option>
@@ -41,7 +41,7 @@
           No puede estar vacio
         </div>
       </div>
-    </div>
+    </div> -->
 
 
 

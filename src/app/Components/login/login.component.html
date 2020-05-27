@@ -12,8 +12,9 @@
 
 
           <div class="card-body">
-
             <h1 class="card-title ">  Quotes Medicals</h1><hr>
+
+
             <h5 class="card-title ">Inicia Sesión</h5>
             <form  class="form-signin" [formGroup]="checkoutForm" (ngSubmit)="onLogin()">
               <div class="input-group mb-2 ">
@@ -21,6 +22,7 @@
                   <div class="input-group-text"><i class="far fa-user"></i></div>
                 </div>
                 <input type="text"  formControlName="login" id="login" class="form-control rounded_corner" placeholder="Username" required autofocus>
+
 
               </div>
 
@@ -31,6 +33,13 @@
                 <input type="password" id="inputPassword" formControlName="password" class="form-control rounded_corner" placeholder="Password" required>
 
               </div>
+
+              <div class="alert alert-danger" *ngIf="(formulario.login.errors || formulario.password.errors) && formulario.password.touched &&  formulario.login.touched ">
+
+              <div *ngIf="  formulario.login.errors?.required">No puede estar vacio el campo login</div>
+              <div *ngIf="formulario.password.errors?.required">No puede estar vacio el campo password</div>
+            </div>
+            <div class="alert alert-danger"  *ngIf="!formValido">El usuario o contraseña no coincide en nuestros registros.</div>
 
               <div class="custom-control custom-checkbox mb-3">
                 <input type="checkbox" class="custom-control-input" id="customCheck1">

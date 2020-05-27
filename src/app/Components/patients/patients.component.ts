@@ -19,9 +19,7 @@ export class PatientsComponent implements OnInit {
   ngOnInit() {
     this.getPatientsByDoctor();
   }
-  showToaster(nombre: string) {
-    this.toastr.success('Has eliminado el paciente ' + nombre + ' exitosamente');
-  }
+
   getPatients(): void {
     this.patientsService.getAllPatients()
         .subscribe(Patients => this.patients = Patients);
@@ -34,9 +32,9 @@ export class PatientsComponent implements OnInit {
   }
 
   delete(patient: Patient): void {
-    this.showToaster(patient.login);
+
     this.patients = this.patients.filter(h => h !== patient);
-    this.patientsService.deletePatient(patient).subscribe();
+    this.patientsService.deletePatient(patient);
 
   }
   sortData(sort: Sort) {

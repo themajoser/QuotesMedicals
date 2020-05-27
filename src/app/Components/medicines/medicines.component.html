@@ -22,9 +22,9 @@
       <th scope="row">{{medicine.id}}</th>
       <td>{{medicine.name}}</td>
       <td>{{medicine.brand}}</td>
-      <td   *ngIf="tokenService.getRole()==='admin'">
+      <td   *ngIf="tokenService.getRole()==='doctor'">
 
-        <!-- <button type="button" routerLink="/medicines/edit/{{medicine.id}}" class="btn btn-info"> <i class="far fa-edit"></i></button>-->
+        <button type="button" routerLink="/medicines/edit/{{medicine.id}}" class="btn btn-info"> <i class="far fa-edit"></i></button>
         <button type="button"  (click)="delete(medicine)"  class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
 
       </td>

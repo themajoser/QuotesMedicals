@@ -23,6 +23,7 @@ export class AppointmentsComponent implements OnInit {
 
   ngOnInit() {
     this.getAppointmentsByDoctor();
+   
   }
   showToaster(nombre: string) {
     this.toastr.success('Has eliminado la cita con ' + nombre + ' exitosamente');
@@ -31,7 +32,8 @@ export class AppointmentsComponent implements OnInit {
   getAppointments(): void {
     this.appointmentsService
       .getAllAppointments()
-      .subscribe((Appointments) => [(this.appointments = Appointments)]);
+      .subscribe((Appointments) => {(this.appointments = Appointments);
+       });
   }
   getAppointmentsByDoctor(): void {
     const id = this.tokenService.getId();

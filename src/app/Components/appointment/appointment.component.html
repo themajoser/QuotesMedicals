@@ -26,7 +26,10 @@
         <button type="button"  (click)="delete(appointment)"  class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
       </td>
     </tr>
+
   </tbody>
+  <div *ngIf="this.appointments.length==0" >No tiene citas asignadas </div>
+
 
 </table>
 

@@ -1,7 +1,8 @@
+import { catchError } from 'rxjs/operators';
 
-import { Injectable, ɵConsole } from '@angular/core';
+import { Injectable, ɵConsole, Pipe } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { JwtModel } from '../Interfaces/JwtModel';
 
 
@@ -24,7 +25,11 @@ export class LoginService {
 
   public login(usuario: string, password: string): Observable<JwtModel> {
     let url=this.authURL +  usuario + '/' + password;
-   console.log(url);
-    return this.httpClient.get<JwtModel>(url , this.cabecera);
+    return this.httpClient.get<JwtModel>(url , this.cabecera).pipe(
+      catchError(e => {
+          return throwError(e);
+      })
+    );
   }
+
 }
