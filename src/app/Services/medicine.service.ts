@@ -8,13 +8,13 @@ import { Observable } from 'rxjs';
 import { Subscription, throwError } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { catchError } from 'rxjs/operators';
-
+import { ToastrService } from 'ngx-toastr';
 @Injectable({
   providedIn: 'root',
 })
 export class MedicineService {
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private toastr: ToastrService) {}
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json',
@@ -49,18 +49,31 @@ export class MedicineService {
   createMedicine(patient: Medicine) {
     const path = `${this.api}/medicines/create`;
 
-    return this.http.post(path, patient, this.httpOptions)  .subscribe((data) => console.log(data),
-    err => console.log(err));
+    return this.http.post(path, patient, this.httpOptions)  .subscribe((data) => this.showToasterAdd(),
+    err =>  this.showToaster());
   }
   updateMedicine(patient: Medicine, id: number) {
 
     const path = `${this.api}/medicines/${id}`;
-    return this.http.put(path, patient, this.httpOptions) .subscribe((data) => console.log(data),
-    err => console.log(err));
+    return this.http.put(path, patient, this.httpOptions) .subscribe((data) => this.showToasterUpdate() ,
+    err =>  this.showToaster());
   }
   deleteMedicine(patient: Medicine| number) {
     const id = typeof patient === 'number' ? patient : patient.id;
     const path = `${this.api}/medicines/${id}`;
-    return this.http.delete(path);
+    return this.http.delete(path).subscribe((data) => this.showToasterDelete() ,
+    err =>  this.showToaster());
+  }
+  showToaster() {
+    this.toastr.error('No se ha podido realizar la acción, por favor intentelo más tarde  ');
+  }
+  showToasterUpdate(){
+    this.toastr.success('Has editado el  medicamento  exitosamente.');
+  }
+  showToasterAdd(){
+    this.toastr.success('Has añadido el  medicamento  exitosamente.');
+  }
+  showToasterDelete(){
+    this.toastr.success('Has eliminado el  medicamento  exitosamente.');
   }
 }

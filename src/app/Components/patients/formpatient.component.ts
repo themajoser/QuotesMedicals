@@ -37,8 +37,6 @@ export class FormPatientComponent implements OnInit {
     this.formPacient = this.fb.group({
       SSCode: [, [Validators.required, Validators.maxLength(11)]],
       login: ['', [Validators.required, Validators.minLength(8)]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
-      // password: [null],
       name: ['', [Validators.required, Validators.maxLength(20)]],
       lastname: ['', [Validators.required, Validators.maxLength(35)]],
       date_of_birth: ['', [Validators.required]],
@@ -48,6 +46,7 @@ export class FormPatientComponent implements OnInit {
       role: ['', [Validators.required]],
       doctor: ['', [Validators.required]],
     });
+    this.checkPassword();
     this.getPatient();
   }
 
@@ -94,7 +93,7 @@ export class FormPatientComponent implements OnInit {
       this.formPacient.patchValue({
         SSCode: this.patient.SSCode,
         login: this.patient.login,
-        password: this.patient.password,
+        password: '',
         name: this.patient.name,
         lastname: this.patient.lastname,
         date_of_birth: this.patient.date_of_birth,
@@ -105,6 +104,13 @@ export class FormPatientComponent implements OnInit {
         doctor: this.patient.doctor,
       });
     });
+  }
+  checkPassword():void{
+    if(this.id){
+      this.formPacient.addControl('password', this.fb.control(''));
+    }else{
+      this.formPacient.addControl('password', this.fb.control('',Validators.required));
+    }
   }
 
   getRoles(): void {

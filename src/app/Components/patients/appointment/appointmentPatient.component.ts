@@ -9,7 +9,7 @@ import { Appointment } from '../../../Interfaces/Appointment';
 import { Component, OnInit } from '@angular/core';
 
 import { Sort } from '@angular/material/sort';
-import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-appointments',
@@ -21,17 +21,14 @@ export class AppointmentsPatientComponent implements OnInit {
   constructor(
     private appointmentsService: AppointmentsService,
     private Login: LoginService,
-    public tokenService: TokenService,
-    private toastr: ToastrService
+    public tokenService: TokenService
   ) {}
 
   ngOnInit() {
     this.getAppointmentsByPatient();
 
   }
-  showToaster() {
-    this.toastr.success('Has eliminado la cita exitosamente');
-  }
+
 
 
   getAppointmentsByPatient(): void {
@@ -46,8 +43,7 @@ export class AppointmentsPatientComponent implements OnInit {
 
   delete(appointment: Appointment): void {
     this.appointments = this.appointments.filter(h => h !== appointment);
-    this.appointmentsService.deleteAppointment(appointment).subscribe();
-    this.showToaster();
+    this.appointmentsService.deleteAppointment(appointment);
   }
   sortData(sort: Sort) {
     const data = this.appointments.slice();

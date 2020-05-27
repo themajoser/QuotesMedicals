@@ -8,14 +8,14 @@ import { Observable } from 'rxjs';
 import { Subscription, throwError } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { catchError } from 'rxjs/operators';
-
+import { ToastrService } from 'ngx-toastr';
 @Injectable({
   providedIn: 'root',
 })
 export class DoctorsService {
 
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private toastr: ToastrService) {}
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json',
@@ -47,21 +47,35 @@ export class DoctorsService {
     const path = `${this.api}/roles/`;
     return this.http.get<Role[]>(path);
   }
-  createDoctor(Doctor: Doctor) {
+  createDoctor( Doctor: Doctor) {
     const path = `${this.api}/Doctors/create`;
 
-    return this.http.post(path, Doctor, this.httpOptions)  .subscribe((data) => console.log(data),
-    err => console.log(err));
+    return this.http.post(path, Doctor, this.httpOptions)  .subscribe((data) => this.showToasterAdd(),
+    err =>  this.showToaster());
   }
-  updateDoctor(Doctor: Doctor, id: number) {
+  updateDoctor( Doctor: Doctor, id: number) {
 
     const path = `${this.api}/doctors/${id}`;
-    return this.http.put<Doctor>(path, Doctor);
+    return this.http.put<Doctor>(path, Doctor) .subscribe((data) => this.showToasterDelete(),
+    err =>  this.showToaster());
   }
-  deleteDoctor(Doctor: Doctor| number) {
+  deleteDoctor( Doctor: Doctor| number) {
     const id = typeof Doctor === 'number' ? Doctor : Doctor.id;
 
     const path = `${this.api}/Doctors/${id}`;
-    return this.http.delete(path);
+    return this.http.delete(path) .subscribe((data) => this.showToasterDelete(),
+    err =>  this.showToaster());;
+  }
+  showToaster() {
+    this.toastr.error('No se ha podido realizar la acción, por favor intentelo más tarde  ');
+  }
+  showToasterUpdate(){
+    this.toastr.success('Has editado el doctor  exitosamente.');
+  }
+  showToasterAdd(){
+    this.toastr.success('Has añadido el doctor  exitosamente.');
+  }
+  showToasterDelete(){
+    this.toastr.success('Has eliminado el doctor  exitosamente.');
   }
 }

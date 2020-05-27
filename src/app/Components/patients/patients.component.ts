@@ -4,7 +4,6 @@ import { PatientsService } from './../../Services/patients.service';
 import { Patient } from './../../Interfaces/patient';
 import { Component, OnInit } from '@angular/core';
 import {Sort} from '@angular/material/sort';
-import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-patients',
   templateUrl: './patients.component.html',
@@ -14,7 +13,7 @@ export class PatientsComponent implements OnInit {
   sortedData: Patient[];
   filterPost = '';
 
-  constructor(private patientsService: PatientsService, private token: TokenService, private toastr: ToastrService ) { }
+  constructor(private patientsService: PatientsService, private token: TokenService ) { }
 
   ngOnInit() {
     this.getPatientsByDoctor();

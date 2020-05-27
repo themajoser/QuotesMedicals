@@ -82,6 +82,6 @@ export class PatientsService {
     this.toastr.success('Has añadido el paciente  exitosamente.');
   }
   showToasterDelete(){
-    this.toastr.success('Has añadido el paciente  exitosamente.');
+    this.toastr.success('Has eliminado el paciente  exitosamente.');
   }
 }

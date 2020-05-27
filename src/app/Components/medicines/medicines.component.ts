@@ -6,7 +6,7 @@ import { Medicine } from './../../Interfaces/Medicine';
 import { Component, OnInit } from '@angular/core';
 import { TokenService } from './../../Services/Token.service';
 import { Sort } from '@angular/material/sort';
-import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-medicines',
@@ -21,14 +21,10 @@ export class MedicinesComponent implements OnInit {
     private medicinesService: MedicineService,
     private Login: LoginService,
     public tokenService: TokenService,
-    private toastr: ToastrService
   ) {}
 
   ngOnInit() {
     this.getMedicines();
-  }
-  showToaster(nombre: string) {
-    this.toastr.success('Has eliminado el medicamento  ' + nombre + ' exitosamente');
   }
 
   getMedicines(): void {
@@ -44,8 +40,7 @@ export class MedicinesComponent implements OnInit {
 
   delete(medicine: Medicine): void {
     this.medicines = this.medicines.filter(h => h !== medicine);
-    this.medicinesService.deleteMedicine(medicine).subscribe();
-    this.showToaster(medicine.name);
+    this.medicinesService.deleteMedicine(medicine);
   }
   sortData(sort: Sort) {
     const data = this.medicines.slice();

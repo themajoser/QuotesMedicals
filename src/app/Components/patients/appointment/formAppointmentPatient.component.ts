@@ -11,7 +11,7 @@ import { AppointmentsService } from 'src/app/Services/appointment.service';
 import { Patient } from 'src/app/Interfaces/patient';
 import { Medicine } from 'src/app/Interfaces/medicine';
 import {formatDate} from '@angular/common';
-import { ToastrService } from 'ngx-toastr';
+
 
 
 @Component({
@@ -35,8 +35,7 @@ export class FormAppointmentPatientComponent implements OnInit {
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private router: Router,
-    private token: TokenService,
-    private toastr: ToastrService
+    private token: TokenService
   ) {}
 
   ngOnInit() {
@@ -84,21 +83,16 @@ export class FormAppointmentPatientComponent implements OnInit {
     }
 
     this.appointmentService.createAppointment(appointment);
-    this.showToasterAdd();
+
 
   }
 
   update(appointment: Appointment): void {
-    this.showToasterUpdate();
+
     this.appointmentService.updateAppointment(appointment, this.id);
   }
 
-showToasterUpdate(){
-  this.toastr.success('Has editado la cita exitosamente.');
-}
-showToasterAdd(){
-  this.toastr.success('Has añadido la cita  exitosamente.');
-}
+
 
   getAppointment(): void {
     if (!this.id) {
