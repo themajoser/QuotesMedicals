@@ -43,6 +43,7 @@ export class LoginComponent implements OnInit {
       this.tokenService.setUserName(data.login);
       this.tokenService.setId(String(data.id));
       this.tokenService.setRole(data.role);
+      console.log(data.password);
       this.router.navigateByUrl("home");
 
 
