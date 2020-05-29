@@ -48,7 +48,7 @@ export class FormAppointmentComponent implements OnInit {
 
 
     this.formAppointment = this.fb.group({
-      assement: ['', [Validators.required, Validators.maxLength(255)]],
+      assement: ['', [Validators.required, Validators.maxLength(255), Validators.pattern('[a-zA-Záéíóúñ ]*')]],
       status: ['', [Validators.required, Validators.maxLength(15)]],
       date: ['', [Validators.required]],
       patient: [, [Validators.required]],

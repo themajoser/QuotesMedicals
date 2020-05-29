@@ -21,7 +21,9 @@
       <li class="nav-item" [routerLinkActive]="['active']">
         <a class="nav-link" routerLink="/patients">Pacientes</a>
       </li>
-
+      <li class="nav-item" [routerLinkActive]="['active']">
+        <a class="nav-link" routerLink="/doctors">Doctores</a>
+      </li>
 
       <li class="nav-item" [routerLinkActive]="['active']">
         <a class="nav-link" routerLink="/appointments">Citas</a>
@@ -52,6 +54,12 @@
           <i class="far fa-user fa-2x text-white"></i>
 
           <ul class="dropdown-menu">
+            <!-- <ng-container  *ngIf="tokenService.getRole()=='patient' ">
+            <li class="dropdown-item "><a  routerLink="/profile/patient/{{tokenService.getId()}}"  data-toggle="modal" data-target=".bs-example-modal-sm" >Mi perfil</a></li>
+          </ng-container>
+          <ng-container  *ngIf="tokenService.getRole()=='doctor' ">
+            <li class="dropdown-item "><a  routerLink="/profile/doctor/{{tokenService.getId()}}"  data-toggle="modal" data-target=".bs-example-modal-sm" >Mi perfil</a></li>
+          </ng-container> -->
             <li class="dropdown-item "><a href="#"  data-toggle="modal" data-target=".bs-example-modal-sm" >Salir</a></li>
           </ul>
         </li>

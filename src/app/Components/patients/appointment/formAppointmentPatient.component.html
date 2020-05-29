@@ -6,7 +6,7 @@
 <div class="card-body pl-4">
 
   <form [formGroup]="formAppointment" (ngSubmit)="onSubmit()">
-<!-- 
+<!--
     <div class="form-group">
       <label>Paciente</label>
       <select [compareWith]="compare" class="form-control" formControlName="patient">
@@ -89,9 +89,8 @@
       >
         <div>La valoración:</div>
         <div *ngIf="formulario.assement.errors.required">No puede estar vacio</div>
-        <div *ngIf="formulario.assement.errors.minlength">
-          Deber contener más de 8 carácteres
-        </div>
+        <div *ngIf="formulario.assement.errors.pattern">No es válido</div>
+        <div *ngIf="formulario.assement.errors.minlength">Deber contener más de 8 carácteres </div>
       </div>
     </div>
 

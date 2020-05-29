@@ -48,7 +48,7 @@ export class DoctorsService {
     return this.http.get<Role[]>(path);
   }
   createDoctor( Doctor: Doctor) {
-    const path = `${this.api}/Doctors/create`;
+    const path = `${this.api}/doctors/create`;
 
     return this.http.post(path, Doctor, this.httpOptions)  .subscribe((data) => this.showToasterAdd(),
     err =>  this.showToaster());
@@ -62,7 +62,7 @@ export class DoctorsService {
   deleteDoctor( Doctor: Doctor| number) {
     const id = typeof Doctor === 'number' ? Doctor : Doctor.id;
 
-    const path = `${this.api}/Doctors/${id}`;
+    const path = `${this.api}/doctors/${id}`;
     return this.http.delete(path) .subscribe((data) => this.showToasterDelete(),
     err =>  this.showToaster());;
   }

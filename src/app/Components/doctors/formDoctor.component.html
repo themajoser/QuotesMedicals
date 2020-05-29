@@ -1,0 +1,112 @@
+<div class="card-head text-muted pl-2">
+  <h1 *ngIf="!this.id" >Crear Doctor</h1>
+  <h1 *ngIf="this.id" >Editar Doctor</h1>
+</div>
+<div class="card-body pl-4">
+
+  <form [formGroup]="formDoctor" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+      <label>Login</label>
+      <input class="form-control" type="text" formControlName="login" />
+      <div
+        class="alert alert-danger"
+        *ngIf="formulario.login.errors && formulario.login.touched"
+      >
+        <div>El login:</div>
+        <div *ngIf="formulario.login.errors.required">No puede estar vacio</div>
+        <div *ngIf="formulario.login.errors.pattern">No es válido</div>
+        <div *ngIf="formulario.login.errors.minlength">Deber contener más de 8 carácteres </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Contraseña</label>
+      <input class="form-control" type="password" formControlName="password" />
+      <div
+        class="alert alert-danger"
+        *ngIf="formulario.password.errors && formulario.password.touched"
+      >
+        <div>La contraseña:</div>
+        <div *ngIf="formulario.password.errors.required">No puede estar vacia</div>
+        <div *ngIf="formulario.password.errors.pattern">Debe de contener como mínimo una una mayúscula, un número, un carácter especial y letra minúscula </div>
+        <div *ngIf="formulario.password.errors.minlength">Deber contener más de 8 carácteres </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Nombre</label>
+      <input class="form-control" type="text" formControlName="name" />
+      <div
+        class="alert alert-danger"
+        *ngIf="formulario.name.errors && formulario.name.touched"
+      >
+        <div>El Nombre:</div>
+          <div *ngIf="formulario.name.errors.required">No puede estar vacio</div>
+          <div *ngIf="formulario.name.errors.pattern">No es válido</div>
+          <div *ngIf="formulario.name.errors.maxlength">Deber contener más de 20 carácteres</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Apellidos</label>
+      <input class="form-control" type="text" formControlName="lastname" />
+      <div class="alert alert-danger" *ngIf="formulario.lastname.errors && formulario.lastname.touched" >
+        <div>Los Apellidos:</div>
+          <div *ngIf="formulario.lastname.errors.required">No pueden estar vacios</div>
+          <div *ngIf="formulario.lastname.errors.pattern">No es válido</div>
+          <div *ngIf="formulario.lastname.errors.maxlength">Deber contener más de 35 carácteres</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Fecha de nacimiento</label>
+      <input class="form-control" type="date" formControlName="date_of_birth" />
+      <div
+        class="alert alert-danger"
+        *ngIf="
+          formulario.date_of_birth.errors && formulario.date_of_birth.touched
+        "
+      >
+        <div>La fecha de nacimiento:</div>
+        <div *ngIf="formulario.date_of_birth.errors.required">No puede estar vacia</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Rol</label>
+      <select [compareWith]="compare" class="form-control" formControlName="role">
+        <option [ngValue]="undefined" >Selecciona un rol</option>
+        <option *ngFor="let role of roles" [ngValue]="role">{{
+          role.name
+        }}</option>
+      </select>
+      <div
+        class="alert alert-danger"
+        *ngIf="formulario.role.errors && formulario.role.touched"
+      >
+        <div>El rol:</div>
+        <div *ngIf="formulario.role.errors.required">No puede estar vacio</div>
+      </div>
+    </div>
+
+
+
+    <div class="form-group">
+      <label>Especialidad</label>
+      <input class="form-control" type="text" formControlName="speciality" />
+      <div class="alert alert-danger" *ngIf="formulario.speciality.errors && formulario.speciality.touched">
+        <div>La especialidad:</div>
+        <div *ngIf="formulario.speciality.errors.required">No puede estar vacia</div>
+        <div *ngIf="formulario.speciality.errors.maxlength">Deber contener menos de 25 carácteres</div>
+      </div>
+    </div>
+
+
+
+    <div>
+      <button class="btn btn-primary">Enviar</button>
+      <button class="btn btn-danger" type="reset">Cancelar</button>
+    </div>
+  </form>
+</div>

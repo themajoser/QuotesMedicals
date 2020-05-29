@@ -53,7 +53,7 @@ export class TokenService {
         roles.forEach(element => {
 
           if ( this.getRole() === element){
-            console.log(element);
+           
               return false;
             }
           if ( this.getRole() === 'admin'){

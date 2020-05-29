@@ -1,3 +1,5 @@
+import { FormDoctorComponent } from './Components/doctors/formDoctor.component';
+import { DoctorsComponent } from './Components/doctors/doctors.component';
 import { FormAppointmentComponent } from './Components/appointment/formAppointment.component';
 import { FormAppointmentPatientComponent } from './Components/patients/appointment/formAppointmentPatient.component';
 import { AppointmentsPatientComponent } from './Components/patients/appointment/appointmentPatient.component';
@@ -71,9 +73,34 @@ const routes: Routes = [
         path: 'medicines',
         component: MedicinesComponent,
         canActivate: [AuthGuard],
-        data: { roleCode: ['doctor','admin'] },
+        data: { roleCode: ['doctor', 'admin'] },
       },
+      {
+        path: 'doctors',
+        component: DoctorsComponent,
+        canActivate: [AuthGuard],
+        data: { roleCode: ['doctor', 'admin'] },
+      },
+      {
+        path: 'doctors/create',
+        component: FormDoctorComponent,
+        canActivate: [AuthGuard],
+        data: { roleCode: ['doctor'] },
+      },
+      { path: 'doctors/edit/:id', component: FormDoctorComponent },
       { path: 'appointments/edit/:id', component: FormAppointmentComponent },
+      // {
+      //   path: '/profile/patient/:id',
+      //   component: MedicinesComponent,
+      //   canActivate: [AuthGuard],
+      //   data: { roleCode: ['doctor', 'admin'] },
+      // },
+      // {
+      //   path: '/profile/patient/:id',
+      //   component: FormPatientComponent,
+      //   canActivate: [AuthGuard],
+      //   data: { roleCode: ['patient'] },
+      // },
     ],
   },
 ];

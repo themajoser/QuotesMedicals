@@ -32,20 +32,21 @@ export class FormPatientComponent implements OnInit {
     this.id = +this.route.snapshot.paramMap.get('id');
     this.getDoctor();
     this.getDoctors();
-    this.getRoles();
+
 
     this.formPacient = this.fb.group({
       SSCode: [, [Validators.required, Validators.maxLength(11)]],
-      login: ['', [Validators.required, Validators.minLength(8)]],
-      name: ['', [Validators.required, Validators.maxLength(20)]],
-      lastname: ['', [Validators.required, Validators.maxLength(35)]],
+      login: ['', [Validators.required, Validators.minLength(8), Validators.pattern('^[A-Za-z0-9]+([A-Za-z0-9]*|[_-]?[A-Za-z0-9]+)*$')]],
+      name: ['', [Validators.required, Validators.maxLength(20), Validators.pattern('[a-zA-Záéíóúñ ]*')]],
+      lastname: ['', [Validators.required, Validators.maxLength(35), Validators.pattern('[a-zA-Záéíóúñ ]*')]],
       date_of_birth: ['', [Validators.required]],
       allergies: ['', [Validators.maxLength(400)]],
       cancer: ['', [Validators.maxLength(25)]],
       diseases: ['', [Validators.maxLength(50)]],
-      role: ['', [Validators.required]],
+      role: [   this.getRoles(), [Validators.required]],
       doctor: ['', [Validators.required]],
     });
+
     this.checkPassword();
     this.getPatient();
   }
@@ -107,9 +108,11 @@ export class FormPatientComponent implements OnInit {
   }
   checkPassword():void{
     if(this.id){
-      this.formPacient.addControl('password', this.fb.control(''));
+      this.formPacient.addControl('password', this.fb.control('',
+      [ Validators.minLength(8), Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&|\\.])[A-Za-z\\d@$!%|\\.*?&]{8,}$')]));
     }else{
-      this.formPacient.addControl('password', this.fb.control('',Validators.required));
+      this.formPacient.addControl('password', this.fb.control('',[ Validators.required, Validators.minLength(8),
+        Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&|\\.])[A-Za-z\\d@$!%|\\.*?&]{8,}$')]));
     }
   }
 

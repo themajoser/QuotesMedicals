@@ -1,25 +1,11 @@
 <div class="card-head text-muted pl-2">
-  <h1>Crear Paciente</h1>
+  <h1 *ngIf="!this.id" >Crear Paciente</h1>
+  <h1 *ngIf="this.id" >Editar Paciente</h1>
 </div>
 <div class="card-body pl-4">
 
   <form [formGroup]="formPacient" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label>Código de la seguridad social</label>
-      <input class="form-control" type="number" formControlName="SSCode" />
-      <div
-        class="alert alert-danger"
-        *ngIf="formulario.SSCode.errors && formulario.SSCode.touched"
-      >
-        <div>El código de la seguridad social:</div>
-        <div *ngIf="formulario.SSCode.errors.required">
-          No puede estar vacio
-        </div>
-        <div *ngIf="formulario.SSCode.errors.maxlength">
-          Deber contener menos de 11 carácteres
-        </div>
-      </div>
-    </div>
+
     <div class="form-group">
       <label>Login</label>
       <input class="form-control" type="text" formControlName="login" />
@@ -29,9 +15,8 @@
       >
         <div>El login:</div>
         <div *ngIf="formulario.login.errors.required">No puede estar vacio</div>
-        <div *ngIf="formulario.login.errors.minlength">
-          Deber contener más de 8 carácteres
-        </div>
+        <div *ngIf="formulario.login.errors.pattern">No es válido</div>
+        <div *ngIf="formulario.login.errors.minlength">Deber contener más de 8 carácteres</div>
       </div>
     </div>
 
@@ -43,12 +28,9 @@
         *ngIf="formulario.password.errors && formulario.password.touched"
       >
         <div>La contraseña:</div>
-        <div *ngIf="formulario.password.errors.required">
-          No puede estar vacia
-        </div>
-        <div *ngIf="formulario.password.errors.minlength">
-          Deber contener más de 8 carácteres
-        </div>
+        <div *ngIf="formulario.password.errors.required"> No puede estar vacia</div>
+        <div *ngIf="formulario.password.errors.pattern">Debe de contener como mínimo una una mayúscula, un número, un carácter especial y letra minúscula </div>
+        <div *ngIf="formulario.password.errors.minlength">Deber contener más de 8 carácteres</div>
       </div>
     </div>
 
@@ -61,9 +43,8 @@
       >
         <div>El Nombre:</div>
         <div *ngIf="formulario.name.errors.required">No puede estar vacio</div>
-        <div *ngIf="formulario.name.errors.maxlength">
-          Deber contener más de 20 carácteres
-        </div>
+        <div *ngIf="formulario.name.errors.pattern">No es válido</div>
+        <div *ngIf="formulario.name.errors.maxlength"> Deber contener más de 20 carácteres </div>
       </div>
     </div>
 
@@ -75,24 +56,17 @@
         *ngIf="formulario.lastname.errors && formulario.lastname.touched"
       >
         <div>Los Apellidos:</div>
-        <div *ngIf="formulario.lastname.errors.required">
-          No pueden estar vacios
-        </div>
-        <div *ngIf="formulario.lastname.errors.maxlength">
-          Deber contener más de 35 carácteres
-        </div>
+        <div *ngIf="formulario.lastname.errors.required">No pueden estar vacios</div>
+        <div *ngIf="formulario.lastname.errors.pattern">No es válido</div>
+        <div *ngIf="formulario.lastname.errors.maxlength">Deber contener más de 35 carácteres </div>
       </div>
     </div>
 
     <div class="form-group">
       <label>Fecha de nacimiento</label>
       <input class="form-control" type="date" formControlName="date_of_birth" />
-      <div
-        class="alert alert-danger"
-        *ngIf="
-          formulario.date_of_birth.errors && formulario.date_of_birth.touched
-        "
-      >
+      <div class="alert alert-danger"
+        *ngIf="formulario.date_of_birth.errors && formulario.date_of_birth.touched ">
         <div>La fecha de nacimiento:</div>
         <div *ngIf="formulario.date_of_birth.errors.required">
           No puede estar vacia
@@ -121,18 +95,14 @@
       <label>Doctor</label>
       <select [compareWith]="compare" class="form-control" formControlName="doctor">
         <option [ngValue]="undefined" >Selecciona un doctor</option>
-        <option *ngFor="let doctor of doctors" [ngValue]="doctor">{{
-          doctor.name
-        }}</option>
+        <option *ngFor="let doctor of doctors" [ngValue]="doctor">{{doctor.name}}</option>
       </select>
       <div
         class="alert alert-danger"
         *ngIf="formulario.doctor.errors && formulario.doctor.touched"
       >
         <div>El doctor:</div>
-        <div *ngIf="formulario.doctor.errors.required">
-          No puede estar vacio
-        </div>
+        <div *ngIf="formulario.doctor.errors.required">No puede estar vacio</div>
       </div>
     </div>
 
@@ -144,9 +114,7 @@
         *ngIf="formulario.date_of_birth.errors && formulario.allergies.touched"
       >
         <div>Las alergias:</div>
-        <div *ngIf="formulario.allergies.errors.maxlength">
-          Deber contener más de 400 carácteres
-        </div>
+        <div *ngIf="formulario.allergies.errors.maxlength">Deber contener más de 400 carácteres</div>
       </div>
     </div>
 
@@ -158,12 +126,8 @@
         *ngIf="formulario.cancer.errors && formulario.cancer.touched"
       >
         <div>El Cancer:</div>
-        <div *ngIf="formulario.cancer.errors.required">
-          No puede estar vacio
-        </div>
-        <div *ngIf="formulario.cancer.errors.maxlength">
-          Deber contener menos de 25 carácteres
-        </div>
+        <div *ngIf="formulario.cancer.errors.required"> No puede estar vacio</div>
+        <div *ngIf="formulario.cancer.errors.maxlength">Deber contener menos de 25 carácteres</div>
       </div>
     </div>
 
@@ -175,12 +139,8 @@
         *ngIf="formulario.diseases.errors && formulario.diseases.touched"
       >
         <div>Las enfermedades:</div>
-        <div *ngIf="formulario.diseases.errors.required">
-          No pueden estar vacias
-        </div>
-        <div *ngIf="formulario.diseases.errors.maxlength">
-          Deber contener menos de 50 carácteres
-        </div>
+        <div *ngIf="formulario.diseases.errors.required">No pueden estar vacias </div>
+        <div *ngIf="formulario.diseases.errors.maxlength">Deber contener menos de 50 carácteres</div>
       </div>
     </div>
 
