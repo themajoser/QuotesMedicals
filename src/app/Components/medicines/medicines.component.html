@@ -18,7 +18,7 @@
     </tr>
   </thead>
   <tbody >
-    <tr  *ngFor="let medicine of sortedData | filter:filterPost">
+    <tr  *ngFor="let medicine of sortedData | filter:filterPost  | paginate: config">
       <th scope="row">{{medicine.id}}</th>
       <td>{{medicine.name}}</td>
       <td>{{medicine.brand}}</td>
@@ -32,5 +32,7 @@
   </tbody>
 
 </table>
-
+<div style="display: flex; justify-content: center;">
+  <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+</div>
 </div>

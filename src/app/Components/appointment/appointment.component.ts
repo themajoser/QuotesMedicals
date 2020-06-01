@@ -14,6 +14,9 @@ import { ToastrService } from 'ngx-toastr';
 export class AppointmentsComponent implements OnInit {
   appointments: Appointment[];
   sortedData: Appointment[];
+  pageOfItems: Array<any>;
+  config: any;
+  num: any;
   constructor(
     private appointmentsService: AppointmentsService,
     private Login: LoginService,
@@ -23,6 +26,11 @@ export class AppointmentsComponent implements OnInit {
 
   ngOnInit() {
     this.getAppointmentsByDoctor();
+    this.config = {
+      itemsPerPage: 3,
+      currentPage: 1,
+      totalItems: +this.num
+    };
 
   }
   showToaster(nombre: string) {
@@ -42,6 +50,7 @@ export class AppointmentsComponent implements OnInit {
       .subscribe((Appointments) => {
         this.appointments = Appointments;
         this.sortedData = this.appointments.slice();
+        this.num = this.sortedData.length;
       });
   }
 
@@ -50,6 +59,13 @@ export class AppointmentsComponent implements OnInit {
     this.appointmentsService.deleteAppointment(appointment);
     this.showToaster(appointment.patient.name);
   }
+  pageChanged(event){
+    this.config.currentPage = event;
+  }
+  onChangePage(pageOfItems: Array<any>) {
+    // update current page of items
+    this.pageOfItems = pageOfItems;
+}
   sortData(sort: Sort) {
     const data = this.appointments.slice();
     if (!sort.active || sort.direction === '') {

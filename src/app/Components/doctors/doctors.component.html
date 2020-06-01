@@ -1,34 +1,55 @@
-<div class="card-head text-muted ml-4 ">
+<div class="card-head text-muted ml-4">
   <h1>Doctores</h1>
 </div>
-<div class="card-body ">
+<div class="card-body">
   <div class="float-right mb-3">
-    <button type="button" routerLink="/doctors/create"   class="btn btn-info">Crear nuevo doctor</button>
+    <button type="button" routerLink="/doctors/create" class="btn btn-info">
+      Crear nuevo doctor
+    </button>
   </div>
   <div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4">
-    <input type="text" class="form-control border-0 bg-light" name="filterPost" placeholder="Buscar..." [(ngModel)]="filterPost">
+    <input
+      type="text"
+      class="form-control border-0 bg-light"
+      name="filterPost"
+      placeholder="Buscar..."
+      [(ngModel)]="filterPost"
+    />
   </div>
-<table class="table table-hover" matSort (matSortChange)="sortData($event)">
-  <thead>
-    <tr>
-      <th mat-sort-header="id" doctors>id</th>
-      <th mat-sort-header="name" doctors>Nombre</th>
-      <th mat-sort-header="lastname" doctors>Apellidos</th>
-      <th mat-sort-header="date_of_birth" doctors>Especialidad</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody  *ngFor="let doctor of sortedData | filter:filterPost">
-    <tr>
-      <th scope="row">{{doctor.id}}</th>
-      <td>{{doctor.name}}</td>
-      <td>{{doctor.lastname}}</td>
-      <td>{{doctor.speciality }}</td>
-      <td>
-        <button type="button" routerLink="/doctors/edit/{{doctor.id}}" class="btn btn-info"> <i class="far fa-edit"></i></button>
-        <button type="button"  (click)="delete(doctor)"  class="btn btn-danger"> <i class="far fa-trash-alt"></i></button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+  <table class="table table-hover" matSort (matSortChange)="sortData($event)">
+    <thead>
+      <tr>
+        <th mat-sort-header="id" doctors>id</th>
+        <th mat-sort-header="name" doctors>Nombre</th>
+        <th mat-sort-header="lastname" doctors>Apellidos</th>
+        <th mat-sort-header="date_of_birth" doctors>Especialidad</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody
+      *ngFor="let doctor of sortedData | filter: filterPost | paginate: config"
+    >
+      <tr>
+        <th scope="row">{{ doctor.id }}</th>
+        <td>{{ doctor.name }}</td>
+        <td>{{ doctor.lastname }}</td>
+        <td>{{ doctor.speciality }}</td>
+        <td>
+          <button
+            type="button"
+            routerLink="/doctors/edit/{{ doctor.id }}"
+            class="btn btn-info"
+          >
+            <i class="far fa-edit"></i>
+          </button>
+          <button type="button" (click)="delete(doctor)" class="btn btn-danger">
+            <i class="far fa-trash-alt"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div style="display: flex; justify-content: center;">
+    <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+  </div>
 </div>

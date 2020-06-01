@@ -18,6 +18,10 @@ import { Sort } from '@angular/material/sort';
 export class AppointmentsPatientComponent implements OnInit {
   appointments: Appointment[];
   sortedData: Appointment[];
+  pageOfItems: Array<any>;
+  config: any;
+  num: any;
+
   constructor(
     private appointmentsService: AppointmentsService,
     private Login: LoginService,
@@ -26,6 +30,11 @@ export class AppointmentsPatientComponent implements OnInit {
 
   ngOnInit() {
     this.getAppointmentsByPatient();
+    this.config = {
+      itemsPerPage: 3,
+      currentPage: 1,
+      totalItems: +this.num
+    };
 
   }
 
@@ -38,6 +47,7 @@ export class AppointmentsPatientComponent implements OnInit {
       .subscribe((Appointments) => {
         this.appointments = Appointments;
         this.sortedData = this.appointments.slice();
+        this.num = this.sortedData.length;
       });
   }
 
@@ -45,6 +55,13 @@ export class AppointmentsPatientComponent implements OnInit {
     this.appointments = this.appointments.filter(h => h !== appointment);
     this.appointmentsService.deleteAppointment(appointment);
   }
+  pageChanged(event){
+    this.config.currentPage = event;
+  }
+  onChangePage(pageOfItems: Array<any>) {
+    // update current page of items
+    this.pageOfItems = pageOfItems;
+}
   sortData(sort: Sort) {
     const data = this.appointments.slice();
     if (!sort.active || sort.direction === '') {

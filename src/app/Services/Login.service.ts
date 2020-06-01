@@ -12,6 +12,12 @@ import { JwtModel } from '../Interfaces/JwtModel';
   providedIn: 'root'
 })
 export class LoginService {
+  loginO: JwtModel={
+    id : undefined,
+    role : undefined,
+    login : undefined,
+    password : undefined
+  }
 
   private authURL = 'http://localhost:8080/login/';
   cabecera = {
@@ -24,8 +30,10 @@ export class LoginService {
   constructor(private httpClient: HttpClient) { }
 
   public login(usuario: string, password: string): Observable<JwtModel> {
-    let url=this.authURL +  usuario + '/' + password;
-    return this.httpClient.get<JwtModel>(url , this.cabecera).pipe(
+    let url = this.authURL;
+    this.loginO.login = usuario;
+    this.loginO.password = password;
+    return this.httpClient.post<JwtModel>(url , this.loginO, this.cabecera).pipe(
       catchError(e => {
           return throwError(e);
       })

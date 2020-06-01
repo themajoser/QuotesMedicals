@@ -13,10 +13,13 @@ import { Sort } from '@angular/material/sort';
   templateUrl: './medicines.component.html',
 })
 export class MedicinesComponent implements OnInit {
-  role:String;
+  role: string;
   medicines: Medicine[];
   sortedData: Medicine[];
   filterPost = '';
+  pageOfItems: Array<any>;
+  config: any;
+  num: any;
   constructor(
     private medicinesService: MedicineService,
     private Login: LoginService,
@@ -25,6 +28,11 @@ export class MedicinesComponent implements OnInit {
 
   ngOnInit() {
     this.getMedicines();
+    this.config = {
+      itemsPerPage: 3,
+      currentPage: 1,
+      totalItems: +this.num
+    };
   }
 
   getMedicines(): void {
@@ -33,7 +41,7 @@ export class MedicinesComponent implements OnInit {
       .subscribe(Medicines => {
         this.medicines = Medicines;
         this.sortedData = this.medicines.slice();
-
+        this.num = this.sortedData.length;
         });
   }
 
@@ -42,6 +50,13 @@ export class MedicinesComponent implements OnInit {
     this.medicines = this.medicines.filter(h => h !== medicine);
     this.medicinesService.deleteMedicine(medicine);
   }
+  pageChanged(event){
+    this.config.currentPage = event;
+  }
+  onChangePage(pageOfItems: Array<any>) {
+    // update current page of items
+    this.pageOfItems = pageOfItems;
+}
   sortData(sort: Sort) {
     const data = this.medicines.slice();
     if (!sort.active || sort.direction === '') {

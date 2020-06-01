@@ -14,18 +14,30 @@ export class DoctorsComponent implements OnInit {
   doctors: Doctor[];
   sortedData: Doctor[];
   filterPost = '';
+  pageOfItems: Array<any>;
+  config: any;
+  num: any;
 
-  constructor(private doctorsService: DoctorsService, private token: TokenService ) { }
+  constructor(private doctorsService: DoctorsService, private token: TokenService ) {
+
+   }
 
   ngOnInit() {
     this.getDoctors();
-   
+    this.config = {
+      itemsPerPage: 3,
+      currentPage: 1,
+      totalItems: +this.num
+    };
+    console.log( this.num);
+
   }
 
   getDoctors(): void {
     this.doctorsService.getAllDoctors()
         .subscribe(Doctors => {this.doctors = Doctors;
-          this.sortedData = this.doctors.slice()});
+                               this.sortedData = this.doctors.slice();
+                               this.num = this.sortedData.length; });
   }
 
 
@@ -35,6 +47,13 @@ export class DoctorsComponent implements OnInit {
     this.doctorsService.deleteDoctor(doctor);
 
   }
+  pageChanged(event){
+    this.config.currentPage = event;
+  }
+  onChangePage(pageOfItems: Array<any>) {
+    // update current page of items
+    this.pageOfItems = pageOfItems;
+}
   sortData(sort: Sort) {
     const data = this.doctors.slice();
     if (!sort.active || sort.direction === '') {
@@ -54,7 +73,7 @@ export class DoctorsComponent implements OnInit {
     });
   }
 }
-  function compare(a: number | string, b: number | string, isAsc: boolean) {
+function compare(a: number | string, b: number | string, isAsc: boolean) {
     return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
 

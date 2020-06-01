@@ -1,3 +1,7 @@
+
+
+
+
 import { DoctorsComponent } from './Components/doctors/doctors.component';
 import { FormDoctorComponent } from './Components/doctors/formDoctor.component';
 import { FilterPipe } from './../pipes/filter.pipe';
@@ -23,6 +27,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { ToastrModule } from 'ngx-toastr';
 import { AppointmentsPatientComponent } from './Components/patients/appointment/appointmentPatient.component';
 import { MedicinesComponent } from './Components/medicines/medicines.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+
 
 
 
@@ -44,7 +50,6 @@ import { MedicinesComponent } from './Components/medicines/medicines.component';
        FormDoctorComponent,
        DoctorsComponent
 
-
    ],
    imports: [
       BrowserModule,
@@ -56,7 +61,10 @@ import { MedicinesComponent } from './Components/medicines/medicines.component';
       BrowserAnimationsModule,
       MatSortModule,
       NgSelectModule,
-      ToastrModule.forRoot()
+      ToastrModule.forRoot(),
+      NgxPaginationModule
+
+
 
 
    ],

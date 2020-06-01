@@ -15,7 +15,7 @@
       <th></th>
     </tr>
   </thead>
-  <tbody  *ngFor="let appointment of sortedData">
+  <tbody  *ngFor="let appointment of sortedData |  paginate: config">
     <tr>
       <th scope="row">{{appointment.id}}</th>
       <td>{{appointment.assement}}</td>
@@ -30,7 +30,8 @@
   </tbody>
   <div *ngIf="this.appointments.length==0" >No tiene citas asignadas </div>
 
-
 </table>
-
+<div style="display: flex; justify-content: center;">
+  <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+</div>
 </div>

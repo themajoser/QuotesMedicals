@@ -12,11 +12,19 @@ export class PatientsComponent implements OnInit {
   patients: Patient[];
   sortedData: Patient[];
   filterPost = '';
+  pageOfItems: Array<any>;
+  config: any;
+  num: any;
 
   constructor(private patientsService: PatientsService, private token: TokenService ) { }
 
   ngOnInit() {
     this.getPatientsByDoctor();
+    this.config = {
+      itemsPerPage: 3,
+      currentPage: 1,
+      totalItems: +this.num
+    };
   }
 
   getPatients(): void {
@@ -26,9 +34,17 @@ export class PatientsComponent implements OnInit {
   getPatientsByDoctor(): void {
     this.patientsService.getAllPatientsByDoctor(+this.token.getId())
     .subscribe(Patients => {this.patients = Patients;
-                            this.sortedData = this.patients.slice();});
+                            this.sortedData = this.patients.slice();
+                            this.num = this.sortedData.length; });
 
   }
+  pageChanged(event){
+    this.config.currentPage = event;
+  }
+  onChangePage(pageOfItems: Array<any>) {
+    // update current page of items
+    this.pageOfItems = pageOfItems;
+}
 
   delete(patient: Patient): void {
 
@@ -55,7 +71,7 @@ export class PatientsComponent implements OnInit {
     });
   }
 }
-  function compare(a: number | string, b: number | string, isAsc: boolean) {
+function compare(a: number | string, b: number | string, isAsc: boolean) {
     return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
 

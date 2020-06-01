@@ -1,3 +1,4 @@
+
 <div class="card-head text-muted ml-4 ">
   <h1>Pacientes</h1>
 </div>
@@ -18,7 +19,7 @@
       <th></th>
     </tr>
   </thead>
-  <tbody  *ngFor="let patient of sortedData | filter:filterPost">
+  <tbody  *ngFor="let patient of sortedData | filter:filterPost | paginate: config">
     <tr>
       <th scope="row">{{patient.id}}</th>
       <td>{{patient.name}}</td>
@@ -30,5 +31,9 @@
       </td>
     </tr>
   </tbody>
+
 </table>
+<div style="display: flex;  justify-content: center; " >
+  <pagination-controls (responsive)=true (pageChange)="pageChanged($event)"></pagination-controls>
+</div>
 </div>
