@@ -48,6 +48,7 @@
         </td>
       </tr>
     </tbody>
+    <div *ngIf="this.num==0" >No se han encontrado ningún resultado </div>
   </table>
   <div style="display: flex; justify-content: center;">
     <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>

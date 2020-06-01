@@ -35,8 +35,7 @@ export class FormAppointmentComponent implements OnInit {
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private router: Router,
-    private token: TokenService,
-    private toastr: ToastrService
+    private token: TokenService
   ) {}
 
   ngOnInit() {
@@ -83,21 +82,14 @@ export class FormAppointmentComponent implements OnInit {
       return;
     }
     this.appointmentService.createAppointment(appointment);
-    this.showToasterAdd(appointment.patient.name);
 
   }
 
   update(appointment: Appointment): void {
-    this.showToasterUpdate(appointment.patient.name);
     this.appointmentService.updateAppointment(appointment, this.id);
   }
 
-showToasterUpdate(nombre:string){
-  this.toastr.success('Has editado la cita con  '+ nombre +' exitosamente.');
-}
-showToasterAdd(nombre:string){
-  this.toastr.success('Has añadido la cita con  '+ nombre +' exitosamente.');
-}
+
 
   getAppointment(): void {
     if (!this.id) {
@@ -134,7 +126,7 @@ showToasterAdd(nombre:string){
   getMedicines(): void {
     this.medicineService.getAllMedicines().subscribe(
       (data) => {this.medicines = data;
-      console.log(data)},
+                 console.log(data); } ,
       (err) => console.log(err)
     );
   }

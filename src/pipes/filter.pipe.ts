@@ -10,9 +10,11 @@ export class FilterPipe implements PipeTransform {
     if (arg === '' || arg.length < 3) { return value; }
     const resultPosts = [];
     for (const medicine of value) {
-      if (medicine.name.toLowerCase().indexOf(arg.toLowerCase()) > -1 || medicine.assement.toLowerCase().indexOf(arg.toLowerCase()) > -1 ) {
+      if (medicine.name.toLowerCase().indexOf(arg.toLowerCase()) > -1 ) {
         resultPosts.push(medicine);
       }
+
+
     }
     return resultPosts;
   }

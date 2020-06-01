@@ -65,7 +65,7 @@ export class FormDoctorComponent implements OnInit {
 
     this.add(this.doctor);
    }
-   // this.router.navigate(['/doctors']);
+    this.router.navigate(['/doctors']);
    }
 
 

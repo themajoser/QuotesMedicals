@@ -66,7 +66,7 @@ export class FormPatientComponent implements OnInit {
 
     this.add(this.patient);
    }
-   // this.router.navigate(['/patients']);
+    this.router.navigate(['/patients']);
    }
 
 
