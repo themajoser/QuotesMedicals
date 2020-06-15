@@ -3,7 +3,7 @@ import { DoctorsService } from './../../Services/doctors.service';
 
 import { TokenService } from './../../Services/Token.service';
 import { Doctor } from './../../Interfaces/doctor';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -118,6 +118,11 @@ export class FormDoctorComponent implements OnInit {
       (err) => console.log(err)
     );
   }
+  // checkUsernameNotTaken(login:string){
+  //   this.doctorsService.getDoctor(this.id).subscribe((data) => {
+  //       data!=null ? return true;
+  //   });
+  // }
 
 
   compare(object1: any, object2: any): boolean {

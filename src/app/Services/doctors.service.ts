@@ -43,6 +43,18 @@ export class DoctorsService {
     const path = `${this.api}/doctors/${id}`;
     return this.http.get<Doctor>(path);
   }
+  getDoctorByLogin(login: string): Observable<Doctor>  {
+    const path = `${this.api}/doctors/${login}`;
+    return this.http.get<Doctor>(path);
+
+  }
+  // checkUsernameNotTaken(login: string): boolean{
+  //   return this.getDoctorByLogin(login).pipe(
+  //     map(res => {
+  //       return res ? null : { login: true };
+  //     })
+  //   )
+  // }
   getRoles(): Observable<Role[]> {
     const path = `${this.api}/roles/`;
     return this.http.get<Role[]>(path);

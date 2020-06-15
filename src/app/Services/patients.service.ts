@@ -48,6 +48,10 @@ export class PatientsService {
     const path = `${this.api}/patients/${id}`;
     return this.http.get<Patient>(path ) ;
   }
+  getPatientByLogin(login: string): Observable<Patient>  {
+    const path = `${this.api}/patients/${login}`;
+    return this.http.get<Patient>(path ) ;
+  }
   getRoles(): Observable<Role[]> {
     const path = `${this.api}/roles/`;
     return this.http.get<Role[]>(path);
